@@ -9,30 +9,42 @@ const guessTenBtn = document.querySelector('#btn-guess-ten');
 const guessTwentyBtn = document.querySelector('#btn-guess-twenty');
 const startGameContainer = document.querySelector('#start-game-container');
 const studentImage = document.querySelector('#student-image');
+const answBtns = document.getElementsByClassName('answer-btns');
+const quitBtn = document.querySelector('#quit-btn')
 
+
+const showBtnsWhenStart = () => {
+    //gör en funktion här som jag kan kalla på för varje startklick (all, 10,20 val)
+    startGameContainer.style = 'display: none';
+    studentImage.style = 'display: block';
+    // answBtns.forEach( (answBtn) =>{
+    //     answBtn.style = 'display: block';
+    // }); funkar ej ännu
+    quitBtn.style = 'display: flex';
+}
 
 //choose between ALL, 10 or 20 guesses
 guessAllBtn.addEventListener('click', (e) => {
     //välj ALLA studenter och starta spel
-    //dölj startGameContainer och visa studentImage
-    startGameContainer.setAttribute('display', 'none');
-    studentImage.setAttribute('display', 'block');
+    //hide startGameContainer and show studentImage + all game buttons
+   showBtnsWhenStart();
+    console.log('"All" is clicked');
 });
 guessTenBtn.addEventListener('click', (e) => {
     //slumpa 10 studenter och starta spel
         // slumpa med Fisher-Yates
-    startGameContainer.setAttribute('display', 'none');
-    studentImage.setAttribute('display', 'block');
+   
 });
 guessTwentyBtn.addEventListener('click', (e) => {
     //slumpa 20 bilder och starta spel
         // slumpa med Fisher-Yates
-    startGameContainer.setAttribute('display', 'none');
-    studentImage.setAttribute('display', 'block');
+   
 });
 
 let guesses;
 let totalScore;
+
+// console.log("Is Javascript connected?")
 
 
 

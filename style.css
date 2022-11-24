@@ -87,7 +87,7 @@ img{
     
 }
 
-.answer-btn{
+.answer-btns{
     display: none;
     background: #6A0136;
 	color: inherit;
@@ -101,11 +101,11 @@ img{
     
 }
 
-.answer-btn:hover{
+.answer-btns:hover{
     background: #B81365;
 }
 
-.btn-quit{
+.quit-btn{
     display: none;
     background: #BFAB25;
 	color: inherit;
@@ -120,6 +120,6 @@ img{
     font-weight: 600;
 }
 
-.btn-quit:hover{
+.quit-btn:hover{
     background: #B81365;
 }
