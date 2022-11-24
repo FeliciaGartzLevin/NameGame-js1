@@ -16,21 +16,32 @@
 <body>
 
     
-        <h1>Name Game</h1>
+    <h1>Name Game</h1>
+    <p class="description">Who is it in the picture? Click the correct name and gain points 🥳</p>
 
-        <div class="image-container">
-            <div class="image">
-                <img src="" alt="Student from FED22" id="image">
+    <div class="image-container">
+        <div class="start-game-container">
+            <p>How many students do you want to guess on?</p>
+            <div class="start-game-btn-container">
+                <button id="btn-guess-all" class="start-game-btn">All</button>
+                <button id="btn-guess-ten" class="start-game-btn">10</button>
+                <button id="btn-guess-twenty" class="start-game-btn">20</button>
             </div>
         </div>
-    
-        <div class="answers-container">
-            <button id="answ1" class="answer-btn">Answer 1</button>
-            <button id="answ2" class="answer-btn">Answer 2</button>
-            <button id="answ3" class="answer-btn">Answer 3</button>
-            <button id="answ4" class="answer-btn">Answer 4</button>
+
+        <div class="student-image">
+            <img src="" alt="Student from FED22" id="image">
         </div>
+    </div>
+
+    <div class="answers-container">
+        <button id="answ1" class="answer-btn">Answer 1</button>
+        <button id="answ2" class="answer-btn">Answer 2</button>
+        <button id="answ3" class="answer-btn">Answer 3</button>
+        <button id="answ4" class="answer-btn">Answer 4</button>
+    </div>
     
+    <button id="quit" class="btn-quit">Quit Game 😾</button>
 
 
     
