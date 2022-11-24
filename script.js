@@ -9,7 +9,7 @@ const guessTenBtn = document.querySelector('#btn-guess-ten');
 const guessTwentyBtn = document.querySelector('#btn-guess-twenty');
 const startGameContainer = document.querySelector('#start-game-container');
 const studentImage = document.querySelector('#student-image');
-const answBtns = document.getElementsByClassName('answer-btns');
+const answBtns = document.querySelectorAll('.answer-btns');
 const quitBtn = document.querySelector('#quit-btn')
 
 
@@ -17,9 +17,10 @@ const showBtnsWhenStart = () => {
     //gör en funktion här som jag kan kalla på för varje startklick (all, 10,20 val)
     startGameContainer.style = 'display: none';
     studentImage.style = 'display: block';
-    // answBtns.forEach( (answBtn) =>{
-    //     answBtn.style = 'display: block';
-    // }); funkar ej ännu
+    answBtns.style = 'display: block';
+    answBtns.forEach( answBtn =>{
+       return answBtn.style = 'display: block';
+    }); //funkar ej ännu
     quitBtn.style = 'display: flex';
 }
 
@@ -33,12 +34,16 @@ guessAllBtn.addEventListener('click', (e) => {
 guessTenBtn.addEventListener('click', (e) => {
     //slumpa 10 studenter och starta spel
         // slumpa med Fisher-Yates
-   
+    //hide startGameContainer and show studentImage + all game buttons
+   showBtnsWhenStart();
+   console.log('"10" is clicked');
 });
 guessTwentyBtn.addEventListener('click', (e) => {
     //slumpa 20 bilder och starta spel
         // slumpa med Fisher-Yates
-   
+    //hide startGameContainer and show studentImage + all game buttons
+   showBtnsWhenStart();
+    console.log('"20" is clicked');
 });
 
 let guesses;
