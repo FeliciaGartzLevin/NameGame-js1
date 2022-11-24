@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+*{
+    font-family: 'Raleway', sans-serif;
+    color: white;
+}
+
+body{
+    background-color: #026C7C;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+h1{
+    font-family: 'Rubik Glitch', cursive;
+    margin: 2rem;
+    font-size: 3.5rem;
+    font-weight: 500;
+    color: #6A0136;
+}
+
+.image-container{
+    background-color: #055864;
+    width: 80%;
+    height: 300px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: dashed 5px #BFAB25;
+}
+
+img{
+    border: dotted 5px #BFAB25;
+    height: 300px;
+}
+
+.answers-container{
+    margin: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    
+}
+
+.answer-btn{
+    background: #6A0136;
+	color: inherit;
+	border: none;
+	padding: 20px;
+    border-radius: 20px;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    margin: 10px;
+}
+
+.answer-btn:hover{
+    background: #B81365;
+}
