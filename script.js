@@ -33,23 +33,27 @@ const shuffleStudents = (array) => {
 	}
 }
 
+//cloning the students array into a new array
+let allStudents = [...students]
+
+shuffleStudents(allStudents);
+
+let chosenStudents;
+
+// console.log(allStudents);
 
 // kanske en while som omsluter all nedan kod som i guess the number 
 // där man gör booleans för att avsluta och starta spel? 
 // Då leder quit button till "startsidan" med att välja antal gissningar
 
-shuffleStudents(students);
 
-let chosenStudents;
-
-// console.log(students);
-
-//-------CLICK BUTTONS IN THE BEGINNING AND CHOOSE HOW MANY TO GUESS ON------
+//-------CLICK BUTTONS IN THE BEGINNING AND CHOOSE HOW MANY STUDENTS TO GUESS ON------
 
 //choose between ALL, 10 or 20 guesses
+
 guessAllBtn.addEventListener('click', (e) => {
     //välj ALLA studenter ✅ och starta spel
-    chosenStudents = students; 
+    chosenStudents = allStudents; 
 
     console.log(chosenStudents);
 
@@ -60,7 +64,7 @@ guessAllBtn.addEventListener('click', (e) => {
 guessTenBtn.addEventListener('click', (e) => {
     //slumpa 10 studenter och starta spel
         // slumpa med Fisher-Yates ✅
-        chosenStudents = students.slice(0,10); //slumpa ut 10 stycken and slice()? out the 10 first? eller borde finnas en annan metod .filter[0-9]? + .map(student.name) för att få ut namnen 
+        chosenStudents = allStudents.slice(0,10); //slumpa ut 10 stycken and slice()? out the 10 first? eller borde finnas en annan metod .filter[0-9]? + .map(student.name) för att få ut namnen 
 
         console.log(chosenStudents);
 
@@ -71,33 +75,65 @@ guessTenBtn.addEventListener('click', (e) => {
 guessTwentyBtn.addEventListener('click', (e) => {
     //slumpa 20 bilder och starta spel
         // slumpa med Fisher-Yates
-        chosenStudents = students.slice(0,20); //slumpa ut 10 stycken
+        chosenStudents = allStudents.slice(0,20); //slumpa ut 10 stycken
 
-        console.log(chosenStudents);
+        // console.log(chosenStudents);
     //hide startGameContainer and show studentImage + all game buttons
-   showBtnsWhenStart();
+    showBtnsWhenStart();
     console.log('"20" is clicked');
+    return () => chosenStudents 
 });
+// chosenStudents = click (); //funkar ej. chosenStudents är fortfarande undefined 🙁
+console.log(chosenStudents); //
 
-//-------END OF CLICKING BUTTONS IN THE BEGINNING AND CHOOSE HOW MANY TO GUESS ON------
 
-let rightGuesses;
-let totalGuesses;
 
-// students.map(student=> student.name); 
-// skickar ut namnen i en array
-// tilldela de sedan slumpad knapp mha fisher-yates?
+//-------END OF CLICKING BUTTONS IN THE BEGINNING AND CHOOSE HOW MANY STUDENTS TO GUESS ON------
+
+
+// hur kan jag få med det valda värdet ovan ut ur scopet i 
+// variabeln chosenStudents och använda det?
+
+// if(chosenStudents == allStudents.slice(0,20)){
+//     studentImage.setAttribute('src', chosenStudents[0].image);
+//     console.log(allStudents);
+// }
+
 
 //FIXA
 // Slumpa fram namn på slumpade positioner samt bild 
 // (typ slumpa tal 1-4 för position för det rätta namnet?)
+//slumpa fel namn från students och inte chosenStudents
 // kan säkert använda Math.random när det bara är 1-4 på
 //  positionen men fisher-yates på alla namn
 // hur koppla rätt bild och 1 rätt namn på slumpad plats 
 // samtidigt som 3 slumpade platser har slumpade namn?
 
+// HUR kunna välja (och få in i html) bild + 1 rätt namn? 
+// att slumpa de andra namnen bör inte vara såå svårt. 
+// Koppla namn till knapp-id.
+// gör allt detta i en funktion eller två eftersom de ska kallas
+// btw gör en foreach-loop eftersom jag ska gissa på alla namn
+
+let rightGuesses;
+let totalGuesses;
+
+// chosenStudents.forEach - njaaaa, 
+// vill ju inte få ut alla på samma gång. bara en i taget
+
+// chosenStudents.forEach( student => {
+//     studentImage.setAttribute('src', student.image[i])
+// }); funkar ej
+
+// students.map(student=> student.name); 
+// skickar ut namnen i en array
+// tilldela de sedan slumpad knapp mha fisher-yates?
+
+
+
 // hårdkodat för nu, vill bara se så att det funkar och det gör det 🥳
-studentImage.setAttribute('src', 'assets/images/students/andre_lang.jpg')
+// studentImage.setAttribute('src', allStudents[0].image); //denna kod funkar
+// studentImage.setAttribute('src', chosenStudents[0].image);
 
 // då vill jag koda in image.value; (value? eller vad). hur vet jag vem som är vem? aaah
 
@@ -114,4 +150,4 @@ studentImage.setAttribute('src', 'assets/images/students/andre_lang.jpg')
 
 
 //how to write total score: `you've got ${rightGuesses}/${totalGuesses} right!`
-// make an htmlEl to print this is
+// make an htmlEl to print this in
