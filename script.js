@@ -33,25 +33,36 @@ const shuffleStudents = (array) => {
 	}
 }
 
-let amountOfStudents;
+
+// kanske en while som omsluter all nedan kod som i guess the number 
+// där man gör booleans för att avsluta och starta spel? 
+// Då leder quit button till "startsidan" med att välja antal gissningar
+
+shuffleStudents(students);
+
+let chosenStudents;
+
+// console.log(students);
+
+//-------CLICK BUTTONS IN THE BEGINNING AND CHOOSE HOW MANY TO GUESS ON------
 
 //choose between ALL, 10 or 20 guesses
 guessAllBtn.addEventListener('click', (e) => {
-    //välj ALLA studenter och starta spel
-    amountOfStudents = students;
+    //välj ALLA studenter ✅ och starta spel
+    chosenStudents = students; 
 
-    console.log(amountOfStudents);
+    console.log(chosenStudents);
 
-    //hide startGameContainer and show studentImage + all game buttons
+    //hide startGameContainer and show studentImage + all game buttons ✅
    showBtnsWhenStart();
     console.log('"All" is clicked');
 });
 guessTenBtn.addEventListener('click', (e) => {
     //slumpa 10 studenter och starta spel
-        // slumpa med Fisher-Yates
-        amountOfStudents = shuffle; //slumpa ut 10 stycken
+        // slumpa med Fisher-Yates ✅
+        chosenStudents = students.slice(0,10); //slumpa ut 10 stycken and slice()? out the 10 first? eller borde finnas en annan metod .filter[0-9]? + .map(student.name) för att få ut namnen 
 
-        console.log(amountOfStudents);
+        console.log(chosenStudents);
 
     //hide startGameContainer and show studentImage + all game buttons
    showBtnsWhenStart();
@@ -60,17 +71,22 @@ guessTenBtn.addEventListener('click', (e) => {
 guessTwentyBtn.addEventListener('click', (e) => {
     //slumpa 20 bilder och starta spel
         // slumpa med Fisher-Yates
-        amountOfStudents = students; //slumpa ut 10 stycken
+        chosenStudents = students.slice(0,20); //slumpa ut 10 stycken
 
+        console.log(chosenStudents);
     //hide startGameContainer and show studentImage + all game buttons
    showBtnsWhenStart();
     console.log('"20" is clicked');
 });
 
+//-------END OF CLICKING BUTTONS IN THE BEGINNING AND CHOOSE HOW MANY TO GUESS ON------
+
 let rightGuesses;
 let totalGuesses;
 
-
+// students.map(student=> student.name); 
+// skickar ut namnen i en array
+// tilldela de sedan slumpad knapp mha fisher-yates?
 
 //FIXA
 // Slumpa fram namn på slumpade positioner samt bild 
