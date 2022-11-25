@@ -24,9 +24,24 @@ const showBtnsWhenStart = () => {
     quitBtn.style = 'display: flex';
 }
 
+const shuffleStudents = (array) => {
+	for (let i = array.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		const temp = array[i];
+		array[i] = array[j];
+		array[j] = temp;
+	}
+}
+
+let amountOfStudents;
+
 //choose between ALL, 10 or 20 guesses
 guessAllBtn.addEventListener('click', (e) => {
     //välj ALLA studenter och starta spel
+    amountOfStudents = students;
+
+    console.log(amountOfStudents);
+
     //hide startGameContainer and show studentImage + all game buttons
    showBtnsWhenStart();
     console.log('"All" is clicked');
@@ -34,6 +49,10 @@ guessAllBtn.addEventListener('click', (e) => {
 guessTenBtn.addEventListener('click', (e) => {
     //slumpa 10 studenter och starta spel
         // slumpa med Fisher-Yates
+        amountOfStudents = shuffle; //slumpa ut 10 stycken
+
+        console.log(amountOfStudents);
+
     //hide startGameContainer and show studentImage + all game buttons
    showBtnsWhenStart();
    console.log('"10" is clicked');
@@ -41,13 +60,17 @@ guessTenBtn.addEventListener('click', (e) => {
 guessTwentyBtn.addEventListener('click', (e) => {
     //slumpa 20 bilder och starta spel
         // slumpa med Fisher-Yates
+        amountOfStudents = students; //slumpa ut 10 stycken
+
     //hide startGameContainer and show studentImage + all game buttons
    showBtnsWhenStart();
     console.log('"20" is clicked');
 });
 
-let guesses;
-let totalScore;
+let rightGuesses;
+let totalGuesses;
+
+
 
 //FIXA
 // Slumpa fram namn på slumpade positioner samt bild 
@@ -57,11 +80,22 @@ let totalScore;
 // hur koppla rätt bild och 1 rätt namn på slumpad plats 
 // samtidigt som 3 slumpade platser har slumpade namn?
 
+// hårdkodat för nu, vill bara se så att det funkar och det gör det 🥳
+studentImage.setAttribute('src', 'assets/images/students/andre_lang.jpg')
+
+// då vill jag koda in image.value; (value? eller vad). hur vet jag vem som är vem? aaah
 
 
 
 
 
 
-//how to write total score: `you've got ${totalScore}/${guesses}`
+
+
+
+
+
+
+
+//how to write total score: `you've got ${rightGuesses}/${totalGuesses} right!`
 // make an htmlEl to print this is

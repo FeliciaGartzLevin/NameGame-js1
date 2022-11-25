@@ -73,9 +73,10 @@ p{
 
 img{
     display: none;
-    border: dotted 5px #BFAB25;
+    border: dashed 5px #BFAB25;
     height: 250px;
     width: auto;
+    border-radius: 20px;
 }
 
 .answers-container{
