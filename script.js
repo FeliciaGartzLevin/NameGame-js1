@@ -1,4 +1,4 @@
-// FIXA
+// FIXA ✅
 // när jag klickar på start-buttons (addeventlistener)
 // så vill jag dölja elementet start-game-btn-container 
 // och visa image + answers+quit-buttons setAttribute('display=none/block')
@@ -18,7 +18,7 @@ const showBtnsWhenStart = () => {
     startGameContainer.style = 'display: none';
     studentImage.style = 'display: block';
     answBtns.style = 'display: block';
-    answBtns.forEach( answBtn =>{
+    answBtns.forEach( answBtn => {
        return answBtn.style = 'display: block';
     }); //funkar ej ännu
     quitBtn.style = 'display: flex';
@@ -49,7 +49,13 @@ guessTwentyBtn.addEventListener('click', (e) => {
 let guesses;
 let totalScore;
 
-// console.log("Is Javascript connected?")
+//FIXA
+// Slumpa fram namn på slumpade positioner samt bild 
+// (typ slumpa tal 1-4 för position för det rätta namnet?)
+// kan säkert använda Math.random när det bara är 1-4 på
+//  positionen men fisher-yates på alla namn
+// hur koppla rätt bild och 1 rätt namn på slumpad plats 
+// samtidigt som 3 slumpade platser har slumpade namn?
 
 
 
