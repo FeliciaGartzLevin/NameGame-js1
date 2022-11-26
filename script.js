@@ -65,6 +65,10 @@ const setUpGuess = () => {
     //randomizing right answer button
     shuffleArray(answBtnArray);
     answBtnArray[0].innerHTML = `${chosenStudents[0].name}`;
+    answBtnArray[1].innerHTML = `${allStudents[1].name}`;
+    answBtnArray[2].innerHTML = `${allStudents[2].name}`;
+    answBtnArray[3].innerHTML = `${allStudents[3].name}`;
+    
 
 }
 
