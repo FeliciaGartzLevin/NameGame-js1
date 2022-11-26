@@ -127,11 +127,12 @@ const clickToChooseAmountOfStudents = () => {
         //hide startGameContainer and show studentImage + all game buttons
         showBtnsWhenStart();
         console.log('"20" is clicked');
-        return chosenStudents;
     });
+    return chosenStudents;
 }
 
 clickToChooseAmountOfStudents();
+console.log(chosenStudents);
 
 //-------END OF CLICKING BUTTONS IN THE BEGINNING AND CHOOSE HOW MANY STUDENTS TO GUESS ON------
 
@@ -142,7 +143,6 @@ clickToChooseAmountOfStudents();
 // så ser jag mitt valda värde när jag skriver in chosenStudents
 // console.log(chosenStudents); // hinner ej klicka på knapparna 
 // innan denna skrivs ut i konsolen som undefined
-
 
 
 
@@ -157,37 +157,65 @@ clickToChooseAmountOfStudents();
 // hur ska jag göra för att känna av rätt click?
 // if( answBtnArray[0]=== chosenStudents[0].name)
 
-let rightGuesses;
-let totalGuesses;
+let rightGuesses = 0;
+let totalGuesses = 0;
 
-// ngt sånt här?:
- 
-while(gameOn){
-    if(click på answBtn === rätt svar ) {
+  
+// behöver jag kanske lägga allt detta i en funktion 
+// som jag kan lägga inuti vart click-event så att 
+// jag kan använda chosenStudents-variabeln? 
+// Men jag måste ju kunna få den med utanför scopet på 
+// något sätt 😡
+/* 
+// ngt sånt här?: 
+while(gameOn && totalGuesses <= chosenStudents.length){ //denna while vill jag ju loopa tills chosenStudents tar slut. ska det göras med en for-loop istället? forEach?
+    if(click på answBtn === rätt svar ) { 
         rightGuesses ++;
         totalGuesses ++; //behöver ej egentligen räkna dessa utan bara ta 
                         //     chosenStudents.length för att veta hur många gissningar 
                         //     det blir, men vet ej hur jag ska få chosenStudents utanför scopet
-        // skriv ut på något sätt att det är rätt svar
+        // skriv ut på något sätt att det är rätt svar:
+    	// // timer. fixa med denna när spelet funkar någolunda
+	    // setTimeout(() => {
+        //     // gör knappen grön i 2 sek och ta bort de andra namnen
+        //          answBtn[rätt].classList.add(gör css-style grön färg);
+        //          answBtn[alla som är fel].style('display', 'hidden');
+        // }, 2000);
+
         setUpNewGuess();
 
     } else if(click på answBtn === !rätt svar){
         totalGuesses ++;
-        // visa på ngt sätt att det var fel och skriv ut 
-        // rätt svar: 
+        // visa på ngt sätt att det var fel och skriv ut rätt svar 
+        // rätt svar:
+        // setTimeout(() => {
+        //     //visar valt svar som en röd knapp i 2 sek
+        //     answBtn[felVal].classList.add(gör en css-style med röd färg);               
+	    //            // timer
+	    //            setTimeout(() => {
+        //                 //visar rätt svar som en grön knapp i 4 sek samtidigt som de andra knapparna försvinner
+        //                 answBtn[rättVal].classList.add(css-style med grön färg);
+        //                 answBtn[felVal].style('display', 'hidden');
+        //                     answBtn[alla som är fel].style('display', 'block')
+        //            }, 2000);
+        // }, 2000);
+        
         setUpNewGuess();
     } else if(click på quitBtn){
+        clickToChooseAmountOfStudents();
+        rightGuesses = 0;
+        totalGuesses = 0;
         gameOn=false;
     }
 
-} 
+}  
+*/
 
 
 
 
-
-
-
+  
+ 
 
 
 
