@@ -1,6 +1,8 @@
 // I värsta fall om allt skiter sig så får jag göra en 
 // HTML-lista med valda bilder där det finns 4 radiobtns 
-// som val på varje och en submit-knapp längst ner.
+// som val på varje och en submit-knapp längst ner som 
+// räknar ihop poängen sen
+//typ se Ninja Quiz
 
 // FIXA ✅
 // när jag klickar på start-buttons (addeventlistener)
@@ -46,29 +48,36 @@ let allStudents = [...students];
 shuffleArray(allStudents);
 
 let chosenStudents;
-
+// let gameOn=false;
 const answBtnArray = [answ1Btn, answ2Btn, answ3Btn, answ4Btn];
 
 // console.log(allStudents);
 
 // kanske en while som omsluter all nedan kod som i guess the number 
 // där man gör booleans för att avsluta och starta spel? 
-// Då leder quit button till "startsidan" med att välja antal gissningar
-
+// Då leder quit button till "startsidan" med att välja antal gissningar igen
+//någonting sånthär?:
+/* const gameOn=true;
+quitBtn.addEventListener('click', () => {
+    gameOn=false;
+}); */
 
 //-------CLICK BUTTONS IN THE BEGINNING AND CHOOSE HOW MANY STUDENTS TO GUESS ON------
 
-const setUpGuess = () => {
+const setUpNewGuess = () => {
     //Setting the first chosen image and starting game
     studentImage.setAttribute('src', chosenStudents[0].image);
 
-    //randomizing right answer button
     shuffleArray(answBtnArray);
+    //randomizing right answer button
     answBtnArray[0].innerHTML = `${chosenStudents[0].name}`;
     answBtnArray[1].innerHTML = `${allStudents[1].name}`;
     answBtnArray[2].innerHTML = `${allStudents[2].name}`;
     answBtnArray[3].innerHTML = `${allStudents[3].name}`;
+    //kan det skrivas såhär istället?
     
+// chosenStudents.map(student=> student.name); 
+// skickar ut namnen i en array
 
 }
 
@@ -78,13 +87,20 @@ const clickToChooseAmountOfStudents = () => {
     guessAllBtn.addEventListener('click', () => {
         //välj ALLA studenter ✅ och starta spel
         chosenStudents = allStudents; 
-
+        
         console.log(chosenStudents);
          //Setting the first chosen image and starting game
-         setUpGuess();
+         setUpNewGuess();
+
         //hide startGameContainer and show studentImage + all game buttons ✅
         showBtnsWhenStart();
         console.log('"All" is clicked');
+
+        // gameOn = true;
+        // får ev fortsätta hela spelet 
+        // här inne i respektive scope? 
+        // Kan ta funktioner från utsidan 
+        // och sätta in.
         
     });
     guessTenBtn.addEventListener('click', () => {
@@ -94,7 +110,7 @@ const clickToChooseAmountOfStudents = () => {
 
         // console.log(chosenStudents);
         //Setting the first chosen image and starting game
-        setUpGuess();
+        setUpNewGuess();
         //hide startGameContainer and show studentImage + all game buttons
         showBtnsWhenStart();
         console.log('"10" is clicked');
@@ -107,7 +123,7 @@ const clickToChooseAmountOfStudents = () => {
         // console.log(chosenStudents);
             
         //Setting the first chosen image and starting game
-        setUpGuess();
+        setUpNewGuess();
         //hide startGameContainer and show studentImage + all game buttons
         showBtnsWhenStart();
         console.log('"20" is clicked');
@@ -117,11 +133,6 @@ const clickToChooseAmountOfStudents = () => {
 
 clickToChooseAmountOfStudents();
 
-if(clickToChooseAmountOfStudents === guessTwentyBtn){
-    chosenStudents = allStudents.slice(0,20);
-}
-
-
 //-------END OF CLICKING BUTTONS IN THE BEGINNING AND CHOOSE HOW MANY STUDENTS TO GUESS ON------
 
 
@@ -129,51 +140,48 @@ if(clickToChooseAmountOfStudents === guessTwentyBtn){
 // variabeln chosenStudents och använda det? 
 // tror jag har det nu iom funktionen. För i konsolen
 // så ser jag mitt valda värde när jag skriver in chosenStudents
-console.log(chosenStudents); // hinner ej klicka på knapparna 
+// console.log(chosenStudents); // hinner ej klicka på knapparna 
 // innan denna skrivs ut i konsolen som undefined
 
-// if(chosenStudents == allStudents.slice(0,20)){
-
-//     console.log(allStudents);
-// }
 
 
-//FIXA
+
+//FIXA ✅
 // Slumpa fram namn på slumpade positioner samt bild 
 // (typ slumpa tal 1-4 för position för det rätta namnet?)
 //slumpa fel namn från students och inte chosenStudents
-// kan säkert använda Math.random när det bara är 1-4 på
-//  positionen men fisher-yates på alla namn
-// hur koppla rätt bild och 1 rätt namn på slumpad plats 
-// samtidigt som 3 slumpade platser har slumpade namn?
 
-// HUR kunna välja (och få in i html) bild + 1 rätt namn? 
-// att slumpa de andra namnen bör inte vara såå svårt. 
-// Koppla namn till knapp-id.
-// gör allt detta i en funktion eller två eftersom de ska kallas
-// btw gör en foreach-loop eftersom jag ska gissa på alla namn
+
+
+// en if-sats för if I click the right answer etc
+// hur ska jag göra för att känna av rätt click?
+// if( answBtnArray[0]=== chosenStudents[0].name)
 
 let rightGuesses;
 let totalGuesses;
 
-// chosenStudents.forEach - njaaaa, 
-// vill ju inte få ut alla på samma gång. bara en i taget
+// ngt sånt här?:
+ 
+while(gameOn){
+    if(click på answBtn === rätt svar ) {
+        rightGuesses ++;
+        totalGuesses ++; //behöver ej egentligen räkna dessa utan bara ta 
+                        //     chosenStudents.length för att veta hur många gissningar 
+                        //     det blir, men vet ej hur jag ska få chosenStudents utanför scopet
+        // skriv ut på något sätt att det är rätt svar
+        setUpNewGuess();
 
-// chosenStudents.forEach( student => {
-    // studentImage.setAttribute('src', chosenStudents.image[1])
-// }); funkar ej
+    } else if(click på answBtn === !rätt svar){
+        totalGuesses ++;
+        // visa på ngt sätt att det var fel och skriv ut 
+        // rätt svar: 
+        setUpNewGuess();
+    } else if(click på quitBtn){
+        gameOn=false;
+    }
 
-// students.map(student=> student.name); 
-// skickar ut namnen i en array
-// tilldela de sedan slumpad knapp mha fisher-yates?
+} 
 
-
-
-// hårdkodat för nu, vill bara se så att det funkar och det gör det 🥳
-// studentImage.setAttribute('src', allStudents[0].image); //denna kod funkar
-// studentImage.setAttribute('src', chosenStudents[0].image);
-
-// då vill jag koda in image.value; (value? eller vad). hur vet jag vem som är vem? aaah
 
 
 
