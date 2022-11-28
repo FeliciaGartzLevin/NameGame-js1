@@ -83,7 +83,6 @@ const setUpNewGuess = () => {
     
 // chosenStudents.map(student=> student.name); 
 // skickar ut namnen i en array
-
 }
 
 /* 
