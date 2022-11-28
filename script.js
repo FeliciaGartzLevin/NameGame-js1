@@ -120,10 +120,12 @@ const gameOnFunc = () => {
 
             answContainer.addEventListener('click', (e) => {
 
-              /*   if(totalGuesses > chosenStudents.length){
+                if(totalGuesses > chosenStudents.length){
                     gameOn = false;
-
-                }  else*/ if(e.target.innerHTML === chosenStudents[0].name) { //
+                    //avsluta spel
+                    console.log(`totalguesses of: ${totalGuesses} is reached`)
+                
+                }  else if(e.target.innerHTML === chosenStudents[0].name) { //
                     console.log("You clicked the right name")
                     rightGuesses ++;
                     totalGuesses ++; //behöver ej egentligen räkna dessa utan bara ta 
@@ -143,7 +145,7 @@ const gameOnFunc = () => {
                     // // hide startGameContainer and show studentImage + all game buttons
                     showAnswBtnsWhenStart();
 
-                } else if(e.target.innerHTML === !chosenStudents[0].name){
+                } else if(e.target.innerHTML !== chosenStudents[0].name){
                     console.log("Clicked wrong name")
                     totalGuesses ++;
                     // visa på ngt sätt att det var fel och skriv ut rätt svar 
@@ -166,7 +168,7 @@ const gameOnFunc = () => {
                     // hide startGameContainer and show studentImage + all game buttons
                     showAnswBtnsWhenStart();
 
-                } else if(e.target.innerHTML === `Quit Game 😾`){
+                } else if(e.target.innerHTML === 'Quit Game 😾'){
                     console.log("Y U quit game?")
                     rightGuesses = 0;
                     totalGuesses = 0;
