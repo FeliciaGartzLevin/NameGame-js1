@@ -85,107 +85,23 @@ const setUpNewGuess = () => {
 
 }
 
-//choose between ALL, 10 or 20 guesses
-const clickToChooseAmountOfStudents = () => {
-
-    guessAllBtn.addEventListener('click', () => {
-        //välj ALLA studenter ✅ och starta spel
-        chosenStudents = allStudents; 
-        
-        console.log(chosenStudents);
-         //Setting the first chosen image and starting game
-         setUpNewGuess();
-
-        //hide startGameContainer and show studentImage + all game buttons ✅
-        showAnswBtnsWhenStart();
-        console.log('"All" is clicked');
-
-        gameOn = true;
-        gameOnFunc();
-
-        // får ev fortsätta hela spelet 
-        // här inne i respektive scope? 
-        // Kan ta funktioner från utsidan 
-        // och sätta in för att kunna använda 
-        // chosenStudents nya värde.
-        
-    });
-    guessTenBtn.addEventListener('click', () => {
-        //slumpa 10 studenter och starta spel
-            // slumpa med Fisher-Yates ✅
-        chosenStudents = allStudents.slice(0,10); //slumpa ut 10 stycken and slice()? out the 10 first? eller borde finnas en annan metod .filter[0-9]? + .map(student.name) för att få ut namnen 
-
-        //Setting the first chosen image and answBtns
-        setUpNewGuess();
-
-        //hide startGameContainer and show studentImage + all game buttons
-        showAnswBtnsWhenStart();
-        console.log('"10" is clicked');
-        gameOn = true;
-        gameOnFunc();
-    });
-    guessTwentyBtn.addEventListener('click', () => {
-    //slumpa 20 bilder och starta spel
-        // slumpa med Fisher-Yates
-        chosenStudents = allStudents.slice(0,20); //slumpa ut 10 stycken
-            
-        //Setting the first chosen image and starting game
-        setUpNewGuess();
-        //hide startGameContainer and show studentImage + all game buttons
-        showAnswBtnsWhenStart();
-        console.log('"20" is clicked');
-
-        gameOn = true;
-        gameOnFunc();
-    });
-}
-
-clickToChooseAmountOfStudents();
-// console.log(chosenStudents);
-
-//-------END OF CLICKING BUTTONS IN THE BEGINNING AND CHOOSE HOW MANY STUDENTS TO GUESS ON------
-
-
-
-
-// hur kan jag få med det valda värdet ovan ut ur scopet i 
-// variabeln chosenStudents och använda det? 
-// tror jag har det nu iom funktionen. För i konsolen
-// så ser jag mitt valda värde när jag skriver in chosenStudents
-// console.log(chosenStudents); // hinner ej klicka på knapparna 
-// innan denna skrivs ut i konsolen som undefined
-
-
-
-//FIXA ✅
-// Slumpa fram namn på slumpade positioner samt bild 
-// (typ slumpa tal 1-4 för position för det rätta namnet?)
-//slumpa fel namn från students och inte chosenStudents
-
-
-
-// en if-sats för if I click the right answer etc
-// hur ska jag göra för att känna av rätt click?
-// if( answBtnArray[0]=== chosenStudents[0].name)
-
 let rightGuesses = 0;
 let totalGuesses = 0;
 
-  
-// behöver jag kanske lägga allt detta i en funktion 
-// som jag kan lägga inuti vart click-event så att 
-// jag kan använda chosenStudents-variabeln? 
-// Men jag måste ju kunna få den med utanför scopet på 
-// något sätt 😡
- 
 // ngt sånt här?: 
 const gameOnFunc = () => {
-    
+    gameOn = true;
+    //Setting the first chosen image and starting game
+    setUpNewGuess();
+    //hide startGameContainer and show studentImage + all game buttons
+    showAnswBtnsWhenStart();
+
     while(gameOn && totalGuesses <= chosenStudents.length){ //denna while vill jag ju loopa tills chosenStudents tar slut. ska det göras med en for-loop istället? forEach?
         answContainer.addEventListener('click', (e) => {
 
             if(e.target.innerHTML = chosenStudents[0].name) { //
                 console.log("You clicked the right name")
+                chosenStudents ++;
                 rightGuesses ++;
                 totalGuesses ++; //behöver ej egentligen räkna dessa utan bara ta 
                                 //     chosenStudents.length för att veta hur många gissningar 
@@ -204,6 +120,7 @@ const gameOnFunc = () => {
             } else if(e.target.innerHTML = !chosenStudents[0].name){
                 console.log("Clicked wrong name")
                 totalGuesses ++;
+                chosenStudents ++;
                 // visa på ngt sätt att det var fel och skriv ut rätt svar 
                 // rätt svar:
                 // setTimeout(() => {
@@ -234,7 +151,90 @@ const gameOnFunc = () => {
     }
 }
 
+//choose between ALL, 10 or 20 guesses
+const clickToChooseAmountOfStudents = () => {
 
+    guessAllBtn.addEventListener('click', () => {
+        //välj ALLA studenter ✅ och starta spel
+        chosenStudents = allStudents; 
+        
+        //  //Setting the first chosen image and starting game
+        //  setUpNewGuess();
+
+        //hide startGameContainer and show studentImage + all game buttons ✅
+        // showAnswBtnsWhenStart();
+        console.log('"All" is clicked');
+
+        // gameOn = true;
+        gameOnFunc();
+
+        // får ev fortsätta hela spelet 
+        // här inne i respektive scope? 
+        // Kan ta funktioner från utsidan 
+        // och sätta in för att kunna använda 
+        // chosenStudents nya värde.
+        
+    });
+    guessTenBtn.addEventListener('click', () => {
+        //slumpa 10 studenter och starta spel
+            // slumpa med Fisher-Yates ✅
+        chosenStudents = allStudents.slice(0,10); //slumpa ut 10 stycken and slice()? out the 10 first? eller borde finnas en annan metod .filter[0-9]? + .map(student.name) för att få ut namnen 
+
+        //Setting the first chosen image and answBtns
+        // setUpNewGuess();
+
+        //hide startGameContainer and show studentImage + all game buttons
+        // showAnswBtnsWhenStart();
+        console.log('"10" is clicked');
+
+        // gameOn = true;
+        gameOnFunc();
+    });
+    guessTwentyBtn.addEventListener('click', () => {
+    //slumpa 20 bilder och starta spel
+        // slumpa med Fisher-Yates
+        chosenStudents = allStudents.slice(0,20); //slumpa ut 10 stycken
+            
+        //Setting the first chosen image and starting game
+        // setUpNewGuess();
+        //hide startGameContainer and show studentImage + all game buttons
+        showAnswBtnsWhenStart();
+        console.log('"20" is clicked');
+
+        // gameOn = true;
+        gameOnFunc();
+    });
+}
+
+clickToChooseAmountOfStudents();
+gameOnFunc();
+
+// console.log(chosenStudents);
+
+//-------END OF CLICKING BUTTONS IN THE BEGINNING AND CHOOSE HOW MANY STUDENTS TO GUESS ON------
+
+
+
+
+// hur kan jag få med det valda värdet ovan ut ur scopet i 
+// variabeln chosenStudents och använda det? 
+// tror jag har det nu iom funktionen. För i konsolen
+// så ser jag mitt valda värde när jag skriver in chosenStudents
+// console.log(chosenStudents); // hinner ej klicka på knapparna 
+// innan denna skrivs ut i konsolen som undefined
+
+
+
+//FIXA ✅
+// Slumpa fram namn på slumpade positioner samt bild 
+// (typ slumpa tal 1-4 för position för det rätta namnet?)
+//slumpa fel namn från students och inte chosenStudents
+
+
+
+// en if-sats för if I click the right answer etc
+// hur ska jag göra för att känna av rätt click?
+// if( answBtnArray[0]=== chosenStudents[0].name)
 
 
 
