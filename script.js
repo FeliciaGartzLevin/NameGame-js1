@@ -21,8 +21,9 @@ const answ1Btn = document.querySelector('#answ1');
 const answ2Btn = document.querySelector('#answ2');
 const answ3Btn = document.querySelector('#answ3');
 const answ4Btn = document.querySelector('#answ4');
+const answContainer = document.querySelector('.answers-container');
 
-const showBtnsWhenStart = () => {
+const showAnswBtnsWhenStart = () => {
     //gör en funktion här som jag kan kalla på för varje startklick (all, 10,20 val)
     startGameContainer.style = 'display: none';
     studentImage.style = 'display: block';
@@ -48,7 +49,7 @@ let allStudents = [...students];
 shuffleArray(allStudents);
 
 let chosenStudents;
-// let gameOn=false;
+let gameOn = false;
 const answBtnArray = [answ1Btn, answ2Btn, answ3Btn, answ4Btn];
 
 // console.log(allStudents);
@@ -64,6 +65,9 @@ quitBtn.addEventListener('click', () => {
 
 //-------CLICK BUTTONS IN THE BEGINNING AND CHOOSE HOW MANY STUDENTS TO GUESS ON------
 
+// Måste loopa över denna enligt vald mängd gissningar
+// på ngågot sätt, men vill ju inte få hela loopen på samma 
+// gång utan klicka och välja emellan
 const setUpNewGuess = () => {
     //Setting the first chosen image and starting game
     studentImage.setAttribute('src', chosenStudents[0].image);
@@ -93,14 +97,17 @@ const clickToChooseAmountOfStudents = () => {
          setUpNewGuess();
 
         //hide startGameContainer and show studentImage + all game buttons ✅
-        showBtnsWhenStart();
+        showAnswBtnsWhenStart();
         console.log('"All" is clicked');
 
-        // gameOn = true;
+        gameOn = true;
+        gameOnFunc();
+
         // får ev fortsätta hela spelet 
         // här inne i respektive scope? 
         // Kan ta funktioner från utsidan 
-        // och sätta in.
+        // och sätta in för att kunna använda 
+        // chosenStudents nya värde.
         
     });
     guessTenBtn.addEventListener('click', () => {
@@ -108,33 +115,37 @@ const clickToChooseAmountOfStudents = () => {
             // slumpa med Fisher-Yates ✅
         chosenStudents = allStudents.slice(0,10); //slumpa ut 10 stycken and slice()? out the 10 first? eller borde finnas en annan metod .filter[0-9]? + .map(student.name) för att få ut namnen 
 
-        // console.log(chosenStudents);
-        //Setting the first chosen image and starting game
+        //Setting the first chosen image and answBtns
         setUpNewGuess();
+
         //hide startGameContainer and show studentImage + all game buttons
-        showBtnsWhenStart();
+        showAnswBtnsWhenStart();
         console.log('"10" is clicked');
+        gameOn = true;
+        gameOnFunc();
     });
     guessTwentyBtn.addEventListener('click', () => {
     //slumpa 20 bilder och starta spel
         // slumpa med Fisher-Yates
         chosenStudents = allStudents.slice(0,20); //slumpa ut 10 stycken
-
-        // console.log(chosenStudents);
             
         //Setting the first chosen image and starting game
         setUpNewGuess();
         //hide startGameContainer and show studentImage + all game buttons
-        showBtnsWhenStart();
+        showAnswBtnsWhenStart();
         console.log('"20" is clicked');
+
+        gameOn = true;
+        gameOnFunc();
     });
-    return chosenStudents;
 }
 
 clickToChooseAmountOfStudents();
-console.log(chosenStudents);
+// console.log(chosenStudents);
 
 //-------END OF CLICKING BUTTONS IN THE BEGINNING AND CHOOSE HOW MANY STUDENTS TO GUESS ON------
+
+
 
 
 // hur kan jag få med det valda värdet ovan ut ur scopet i 
@@ -166,62 +177,112 @@ let totalGuesses = 0;
 // jag kan använda chosenStudents-variabeln? 
 // Men jag måste ju kunna få den med utanför scopet på 
 // något sätt 😡
-/* 
+ 
 // ngt sånt här?: 
-while(gameOn && totalGuesses <= chosenStudents.length){ //denna while vill jag ju loopa tills chosenStudents tar slut. ska det göras med en for-loop istället? forEach?
-    if(click på answBtn === rätt svar ) { 
-        rightGuesses ++;
-        totalGuesses ++; //behöver ej egentligen räkna dessa utan bara ta 
-                        //     chosenStudents.length för att veta hur många gissningar 
-                        //     det blir, men vet ej hur jag ska få chosenStudents utanför scopet
-        // skriv ut på något sätt att det är rätt svar:
-    	// // timer. fixa med denna när spelet funkar någolunda
-	    // setTimeout(() => {
-        //     // gör knappen grön i 2 sek och ta bort de andra namnen
-        //          answBtn[rätt].classList.add(gör css-style grön färg);
-        //          answBtn[alla som är fel].style('display', 'hidden');
-        // }, 2000);
+const gameOnFunc = () => {
+    
+    while(gameOn && totalGuesses <= chosenStudents.length){ //denna while vill jag ju loopa tills chosenStudents tar slut. ska det göras med en for-loop istället? forEach?
+        answContainer.addEventListener('click', (e) => {
 
-        setUpNewGuess();
+            if(e.target.innerHTML = chosenStudents[0].name) { //
+                console.log("You clicked the right name")
+                rightGuesses ++;
+                totalGuesses ++; //behöver ej egentligen räkna dessa utan bara ta 
+                                //     chosenStudents.length för att veta hur många gissningar 
+                                //     det blir, men vet ej hur jag ska få chosenStudents utanför scopet
+                // skriv ut på något sätt att det är rätt svar:
+                // kan kanske bara skriva i ett htmlEl under bilden 
+                // så det inte blir bökigt
+                // // timer. fixa med denna när spelet funkar någolunda
+                    // setTimeout(() => {
+                //     // gör knappen grön i 2 sek och ta bort de andra namnen
+                //          answBtn[rätt].classList.add(gör css-style grön färg);
+                //          answBtn[alla som är fel].style('display', 'hidden');
+                // }, 2000);
+                setUpNewGuess();
 
-    } else if(click på answBtn === !rätt svar){
-        totalGuesses ++;
-        // visa på ngt sätt att det var fel och skriv ut rätt svar 
-        // rätt svar:
-        // setTimeout(() => {
-        //     //visar valt svar som en röd knapp i 2 sek
-        //     answBtn[felVal].classList.add(gör en css-style med röd färg);               
-	    //            // timer
-	    //            setTimeout(() => {
-        //                 //visar rätt svar som en grön knapp i 4 sek samtidigt som de andra knapparna försvinner
-        //                 answBtn[rättVal].classList.add(css-style med grön färg);
-        //                 answBtn[felVal].style('display', 'hidden');
-        //                     answBtn[alla som är fel].style('display', 'block')
-        //            }, 2000);
-        // }, 2000);
-        
-        setUpNewGuess();
-    } else if(click på quitBtn){
-        clickToChooseAmountOfStudents();
-        rightGuesses = 0;
-        totalGuesses = 0;
-        gameOn=false;
+            } else if(e.target.innerHTML = !chosenStudents[0].name){
+                console.log("Clicked wrong name")
+                totalGuesses ++;
+                // visa på ngt sätt att det var fel och skriv ut rätt svar 
+                // rätt svar:
+                // setTimeout(() => {
+
+
+                //     //visar valt svar som en röd knapp i 2 sek
+                //     answBtn[felVal].classList.add(gör en css-style med röd färg);               
+                    //            // timer
+                    //            setTimeout(() => {
+                //                 //visar rätt svar som en grön knapp i 4 sek samtidigt som de andra knapparna försvinner
+                //                 answBtn[rättVal].classList.add(css-style med grön färg);
+                //                 answBtn[felVal].style('display', 'hidden');
+                //                     answBtn[alla som är fel].style('display', 'block')
+                //            }, 2000);
+                // }, 2000);
+
+
+                setUpNewGuess();
+
+            } else if(e.target.innerHTML = `Quit Game 😾`){
+                console.log("Y U quit game?")
+                rightGuesses = 0;
+                totalGuesses = 0;
+                gameOn = false;
+                clickToChooseAmountOfStudents();
+            }
+        }); 
     }
+}
 
-}  
-*/
 
 
 
 
   
  
+// nästa steg nu är att länka clicked 
+// answBtn till rätt påföljd i if-satsen
+
+// hur kan en if-sats känna av ett click?
+// hur registrera rätt svar? 👇
+
+/* 
+såhär såklart! 💡 (nedan kod):
+lägg ett click-eventlistener på answers-container.
+kolla var e.target är och få in ovan if-sats.
+Kan ju då inte använda tagname==="BUTTON" eftersom
+jag vill få ut specifik button, så kanske man kan 
+ha e.target.id eller dyl?
+använd stopPropagation(); här också? kolla detta i shauns popup 
+som johan hjälpte mig med
+*/
+// SE TODOS + SHAUNS POPUP 
+// answContainer.addEventListener('click', (e) => {
+// 	// console.log("You clicked on either the whole div, or on a button", e.target);
+
+// 	// check if user clicked on a LI element
+// 	if (e.target.tagName === "BUTTON") {
+// 		// console.log("YAY you clicked on a todo (LI)", e.target);
+// 		// console.log("The clicked todo's title is:", e.target.innerText);
+
+// 		// get the `data-todo-id` attribute from the LI element
+// 		const clickedTodoId = e.target.dataset.todoId;     // `data-todo-id`
+// 		// console.log("You clicked on the listitem for todo with id:", clickedTodoId);
+
+// 		// search todos for the todo with the id todoId
+// 		const clickedTodo = todos.find( (todo) => {
+// 			return todo.id == clickedTodoId;
+// 		} );
+// 		console.log("found clicked todo", clickedTodo);
+// 	}
+// }); 
 
 
 
-
-
-
+// Hur kan jag få spelet att köra 
+// om och om igen igenom valt antal elever?
+// något med while(gameOn && totalGuesses <= chosenStudents.length)
+// kanske? (se while-loopen ovan)
 
 //how to write total score: `you've got ${rightGuesses}/${totalGuesses} right!`
 // make an htmlEl to print this in
