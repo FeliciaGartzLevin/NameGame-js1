@@ -30,7 +30,7 @@ const showAnswBtnsWhenStart = () => {
     answBtns.style = 'display: block';
     answBtns.forEach( answBtn => {
        return answBtn.style = 'display: block';
-    }); //funkar ej ännu
+    }); 
     quitBtn.style = 'display: flex';
 }
 
@@ -69,7 +69,9 @@ quitBtn.addEventListener('click', () => {
 // på ngågot sätt, men vill ju inte få hela loopen på samma 
 // gång utan klicka och välja emellan
 const setUpNewGuess = () => {
-    shuffleArray(chosenStudents);
+    shuffleArray(chosenStudents); //sluta shuffla denna och shift() 
+                                  // bort [0] hela tiden tills img är slut
+                                  
     //Setting the first chosen image and starting game
     studentImage.setAttribute('src', chosenStudents[0].image);
 
@@ -86,10 +88,10 @@ const setUpNewGuess = () => {
 }
 
 /* 
-forEach som inte funkar
+forEach som inte funkar:
+const setUpNewGuess = (chosenStudents) => {
 chosenStudents.forEach(chosenStudent => {
-    // // Setting the first chosen image and starting game
-    shuffleArray(chosenStudents);
+   
     //Setting the first chosen image and starting game
     studentImage.setAttribute('src', chosenStudents[chosenStudent].image);
 
@@ -99,7 +101,8 @@ chosenStudents.forEach(chosenStudent => {
     answBtnArray[1].innerHTML = `${allStudents[1].name}`;
     answBtnArray[2].innerHTML = `${allStudents[2].name}`;
     answBtnArray[3].innerHTML = `${allStudents[3].name}`;
-*/
+}
+}*/
 
 let rightGuesses = 0;
 let totalGuesses = 0; 
@@ -120,11 +123,12 @@ const gameOnFunc = () => {
 
             answContainer.addEventListener('click', (e) => {
 
-                if(totalGuesses > chosenStudents.length){
+                if(totalGuesses >= chosenStudents.length){
                     gameOn = false;
                     //avsluta spel
                     console.log(`totalguesses of: ${totalGuesses} is reached`)
-                
+                    
+
                 }  else if(e.target.innerHTML === chosenStudents[0].name) { //
                     console.log("You clicked the right name")
                     rightGuesses ++;
@@ -168,13 +172,13 @@ const gameOnFunc = () => {
                     // hide startGameContainer and show studentImage + all game buttons
                     showAnswBtnsWhenStart();
 
-                } else if(e.target.innerHTML === 'Quit Game 😾'){
-                    console.log("Y U quit game?")
-                    rightGuesses = 0;
-                    totalGuesses = 0;
-                    gameOn = false;
-                    clickToChooseAmountOfStudents();
-                }
+                } //else if(e.target.innerHTML === 'Quit Game 😾'){
+                //     console.log("Y U quit game?")
+                //     rightGuesses = 0;
+                //     totalGuesses = 0;
+                //     gameOn = false;
+                //     clickToChooseAmountOfStudents();
+                // }
             }); 
         // });
     // } 
@@ -204,9 +208,13 @@ const clickToChooseAmountOfStudents = () => {
         // Kan ta funktioner från utsidan 
         // och sätta in för att kunna använda 
         // chosenStudents nya värde.
+        // annars en callback funktion:
+        // se weather app app.js renderCurrentWeather(data);
+        // där jag sätter in chosenStudent som parameter
+        // typ setUpNewGuess(chosenStudents); kanske?
         
     });
-    guessTenBtn.addEventListener('click', () => {
+    guessTenBtn.addEventListener('click', () => { // kan man skriva guessTenBtn.addEventListener('click', () => {}); och returnera värdet från en if-sats ist?
         //slumpa 10 studenter och starta spel
             // slumpa med Fisher-Yates ✅
         chosenStudents = allStudents.slice(0,10); //slumpa ut 10 stycken and slice()? out the 10 first? eller borde finnas en annan metod .filter[0-9]? + .map(student.name) för att få ut namnen 
@@ -238,6 +246,14 @@ const clickToChooseAmountOfStudents = () => {
 }
 
 clickToChooseAmountOfStudents();
+
+/* quitBtn.addEventListener('click', (e) => {
+    console.log("Y U quit game?")
+    rightGuesses = 0;
+    totalGuesses = 0;
+    gameOn = false;
+    clickToChooseAmountOfStudents(); //denna är ju starten på spelet anyways, missriktat namn på denna
+});  */ //funkar ej. vill försöka välja att bryta mig ur en while loop ovan istället
 // gameOnFunc();
 
 // console.log(chosenStudents);
