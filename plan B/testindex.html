@@ -21,36 +21,37 @@
         <h2 class="h4 mx-4">Choose how many guesses you want to make:</h2>
 
         <div class="choose-buttons-container">
-            <button class="btn btn-warning m-2">All</button>
-            <button class="btn btn-warning m-2">10</button>
-            <button class="btn btn-warning m-2">20</button>
+            <button class="btn btn-warning m-3 py-3 px-4">All</button>
+            <button class="btn btn-warning m-3 py-3 px-4">10</button>
+            <button class="btn btn-warning m-3 py-3 px-4">20</button>
         </div>
 
         <form>
-            <div class="large-wrapper">
+            <!-- replace content in .large-wrapper with a start-image -->
+            <div class="large-wrapper"> 
                 <!-- 1st pic -->
                 <div class="student-card m-4">
                     <img src="https://placekitten.com/300/300" alt="Student in FED22M" >
                     <div id="guess-template" class="m-4 guess-template">
                         <!-- alt 1 -->
                         <div id="altOne" class="m-2 altOne">
-                            <input type="radio" name="${student.name}" value="${student.name}">
-                            <label for="${student.name}">Answer 1</label>
+                            <input type="radio" name="${guessNumber1}" value="${student.name}">
+                            <label for="${guessNumber1}">Answer 1</label>
                         </div>
                         <!-- alt 2 -->
                         <div id="altTwo" class="m-2 altTwo">
-                            <input type="radio" name="${student.name}" value="">
-                            <label for="${student.name}">Answer 2</label>
+                            <input type="radio" name="${guessNumber1}" value="${fromAllStudents.name}">
+                            <label for="${guessNumber1}">Answer 2</label>
                         </div>
                         <!-- alt 3 -->
                         <div id="altThree" class="m-2 altThree">
-                            <input type="radio" name="${student.name}" value="">
-                            <label for="${student.name}">Answer 3</label>
+                            <input type="radio" name="${guessNumber1}" value="${fromAllStudents.name}">
+                            <label for="${guessNumber1}">Answer 3</label>
                         </div>
                         <!-- alt 4 -->
                         <div id="altFour" class="m-2 altFour">
-                            <input type="radio" name="${student.name}" value="">
-                            <label for="${student.name}">Answer 4</label>
+                            <input type="radio" name="${guessNumber1}" value="${fromAllStudents.name}">
+                            <label for="${guessNumber1}">Answer 4</label>
                         </div>
                     </div>
                 </div>
@@ -60,23 +61,23 @@
                     <div id="guess-template" class="m-4 guess-template">
                         <!-- alt 1 -->
                         <div id="altOne" class="m-2 altOne">
-                            <input type="radio" name="${student.name}" value="${student.name}">
-                            <label for="${student.name}">Answer 1</label>
+                            <input type="radio" name="${guessNumber2}" value="${student.name}">
+                            <label for="${guessNumber2}">Answer 1</label>
                         </div>
                         <!-- alt 2 -->
                         <div id="altTwo" class="m-2 altTwo">
-                            <input type="radio" name="${student.name}" value="">
-                            <label for="${student.name}">Answer 2</label>
+                            <input type="radio" name="${guessNumber2}" value="${fromAllStudents.name}">
+                            <label for="${guessNumber2}">Answer 2</label>
                         </div>
                         <!-- alt 3 -->
                         <div id="altThree" class="m-2 altThree">
-                            <input type="radio" name="${student.name}" value="">
-                            <label for="${student.name}">Answer 3</label>
+                            <input type="radio" name="${guessNumber2}" value="${fromAllStudents.name}">
+                            <label for="${guessNumber2}">Answer 3</label>
                         </div>
                         <!-- alt 4 -->
                         <div id="altFour" class="m-2 altFour">
-                            <input type="radio" name="${student.name}" value="">
-                            <label for="${student.name}">Answer 4</label>
+                            <input type="radio" name="${guessNumber2}" value="${fromAllStudents.name}">
+                            <label for="${guessNumber2}">Answer 4</label>
                         </div>
                     </div>
                 </div>
@@ -86,29 +87,29 @@
                     <div id="guess-template" class="m-4 guess-template">
                         <!-- alt 1 -->
                         <div id="altOne" class="m-2 altOne">
-                            <input type="radio" name="${student.name}" value="${student.name}">
-                            <label for="${student.name}">Answer 1</label>
+                            <input type="radio" name="${guessNumber3}" value="${student.name}">
+                            <label for="${guessNumber3}">Answer 1</label>
                         </div>
                         <!-- alt 2 -->
                         <div id="altTwo" class="m-2 altTwo">
-                            <input type="radio" name="${student.name}" value="">
-                            <label for="${student.name}">Answer 2</label>
+                            <input type="radio" name="${guessNumber3}" value="${fromAllStudents.name}">
+                            <label for="${guessNumber3}">Answer 2</label>
                         </div>
                         <!-- alt 3 -->
                         <div id="altThree" class="m-2 altThree">
-                            <input type="radio" name="${student.name}" value="">
-                            <label for="${student.name}">Answer 3</label>
+                            <input type="radio" name="${guessNumber3}" value="${fromAllStudents.name}">
+                            <label for="${guessNumber3}">Answer 3</label>
                         </div>
                         <!-- alt 4 -->
                         <div id="altFour" class="m-2 altFour">
-                            <input type="radio" name="${student.name}" value="">
-                            <label for="${student.name}">Answer 4</label>
+                            <input type="radio" name="${guessNumber3}" value="${fromAllStudents.name}">
+                            <label for="${guessNumber3}">Answer 4</label>
                         </div>
                     </div>
                 </div> 
             </div>
             <div class="form-btns">
-                <button type="submit" class="btn btn-success p-3 mx-1 my-4">Done</button>
+                <button type="submit" class="btn btn-success p-3 mx-1 my-4">Submit guesses</button>
                 <button class="btn btn-danger p-3 mx-1 my-4">Quit Game 😾</button>
             </div>
         </form>
