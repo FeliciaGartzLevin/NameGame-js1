@@ -1,0 +1,61 @@
+img{
+    max-width: 300px;
+    height: auto;
+}
+
+ @media screen and (max-width: 600px){
+    .student-images{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px;
+
+    }
+    .guess-form{
+        display: grid;
+        grid-template-areas: 
+        "a b"
+        "c d";
+    }
+    .altOne{
+        grid-area: a;
+    }
+    .altTwo{
+        grid-area: b;
+    }
+    .altThree{
+        grid-area: c;
+    }
+    .altFour{
+        grid-area: d;
+    }
+}
+
+@media screen and (min-width: 600px){
+    .student-images{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    form{
+        display: flex;
+        flex-direction: row;
+    }
+    
+} 
+
+@media screen and (min-width: 1200px){
+    .student-images{
+        display: flex;
+        flex-direction: row;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+    }
+    .large-wrapper{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+} 

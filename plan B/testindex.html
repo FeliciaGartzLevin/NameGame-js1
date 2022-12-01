@@ -15,7 +15,7 @@
 </head>
 <body class="bg-dark text-white">
 
-    <div class="container-all text-center ">
+    <div class="container text-center ">
         <h1 class="my-4">Name Game Test</h1>
 
         <h2 class="h4 mx-4">Choose how many guesses you want to make:</h2>
@@ -26,35 +26,91 @@
             <button class="btn btn-warning m-2">20</button>
         </div>
 
-        <div class="student-images m-4 col">
-            <img src="https://placekitten.com/300/300" alt="Student in FED22M" class="img-fluid">
-            <form id="guess-form" class="m-4 d-flex justify-content-center">
-                <!-- alt 1 -->
-                <div id="alt1">
-                    <input type="radio" name="${student.name}" value="${student.name}">
-                    <label for="${student.name}">Answer 1</label>
-                </div>
-                <!-- alt 2 -->
-                <div id="alt2">
-                    <input type="radio" name="${student.name}" value="">
-                    <label for="${student.name}">Answer 2</label>
-                </div>
-                <!-- alt 3 -->
-                <div id="alt3">
-                    <input type="radio" name="${student.name}" value="">
-                    <label for="${student.name}">Answer 3</label>
-                </div>
-                <!-- alt 4 -->
-                <div id="4">
-                    <input type="radio" name="${student.name}" value="">
-                    <label for="${student.name}">Answer 4</label>
-                </div>
-            </form>
+        <div class="large-wrapper">
+            <!-- 1st pic -->
+            <div class="student-images m-4">
+                <img src="https://placekitten.com/300/300" alt="Student in FED22M" >
+                <form id="guess-form" class="m-4 guess-form">
+                    <!-- alt 1 -->
+                    <div id="altOne" class="m-2 altOne">
+                        <input type="radio" name="${student.name}" value="${student.name}">
+                        <label for="${student.name}">Answer 1</label>
+                    </div>
+                    <!-- alt 2 -->
+                    <div id="altTwo" class="m-2 altTwo">
+                        <input type="radio" name="${student.name}" value="">
+                        <label for="${student.name}">Answer 2</label>
+                    </div>
+                    <!-- alt 3 -->
+                    <div id="altThree" class="m-2 altThree">
+                        <input type="radio" name="${student.name}" value="">
+                        <label for="${student.name}">Answer 3</label>
+                    </div>
+                    <!-- alt 4 -->
+                    <div id="altFour" class="m-2 altFour">
+                        <input type="radio" name="${student.name}" value="">
+                        <label for="${student.name}">Answer 4</label>
+                    </div>
+                </form>
+            </div>
+            <!-- 2nd pic -->
+            <div class="student-images m-4">
+                <img src="https://placekitten.com/300/300" alt="Student in FED22M" >
+                <form id="guess-form" class="m-4 guess-form">
+                    <!-- alt 1 -->
+                    <div id="altOne" class="m-2 altOne">
+                        <input type="radio" name="${student.name}" value="${student.name}">
+                        <label for="${student.name}">Answer 1</label>
+                    </div>
+                    <!-- alt 2 -->
+                    <div id="altTwo" class="m-2 altTwo">
+                        <input type="radio" name="${student.name}" value="">
+                        <label for="${student.name}">Answer 2</label>
+                    </div>
+                    <!-- alt 3 -->
+                    <div id="altThree" class="m-2 altThree">
+                        <input type="radio" name="${student.name}" value="">
+                        <label for="${student.name}">Answer 3</label>
+                    </div>
+                    <!-- alt 4 -->
+                    <div id="altFour" class="m-2 altFour">
+                        <input type="radio" name="${student.name}" value="">
+                        <label for="${student.name}">Answer 4</label>
+                    </div>
+                </form>
+            </div>
+            <!-- 3d pic -->
+            <div class="student-images m-4">
+                <img src="https://placekitten.com/300/300" alt="Student in FED22M" >
+                <form id="guess-form" class="m-4 guess-form">
+                    <!-- alt 1 -->
+                    <div id="altOne" class="m-2 altOne">
+                        <input type="radio" name="${student.name}" value="${student.name}">
+                        <label for="${student.name}">Answer 1</label>
+                    </div>
+                    <!-- alt 2 -->
+                    <div id="altTwo" class="m-2 altTwo">
+                        <input type="radio" name="${student.name}" value="">
+                        <label for="${student.name}">Answer 2</label>
+                    </div>
+                    <!-- alt 3 -->
+                    <div id="altThree" class="m-2 altThree">
+                        <input type="radio" name="${student.name}" value="">
+                        <label for="${student.name}">Answer 3</label>
+                    </div>
+                    <!-- alt 4 -->
+                    <div id="altFour" class="m-2 altFour">
+                        <input type="radio" name="${student.name}" value="">
+                        <label for="${student.name}">Answer 4</label>
+                    </div>
+                </form>
+            </div>
+            
         </div>
 
     </div>
     
-    
+<script src="/students.js"></script>
 <script src="testscript.js"></script>
 </body>
 </html>
