@@ -13,15 +13,43 @@
 	<link rel="stylesheet" href="teststyle.css">
 
 </head>
-<body class="bg-dark">
+<body class="bg-dark text-white">
 
-    <div class="container-all text-white text-center ">
+    <div class="container-all text-center ">
         <h1 class="my-4">Name Game Test</h1>
 
         <h2 class="h4 mx-4">Choose how many guesses you want to make:</h2>
 
-        <div class="buttons-container">
-            
+        <div class="choose-buttons-container">
+            <button class="btn btn-warning m-2">All</button>
+            <button class="btn btn-warning m-2">10</button>
+            <button class="btn btn-warning m-2">20</button>
+        </div>
+
+        <div class="student-images m-4 col">
+            <img src="https://placekitten.com/300/300" alt="Student in FED22M" class="img-fluid">
+            <form id="guess-form" class="m-4 d-flex justify-content-center">
+                <!-- alt 1 -->
+                <div id="alt1">
+                    <input type="radio" name="${student.name}" value="${student.name}">
+                    <label for="${student.name}">Answer 1</label>
+                </div>
+                <!-- alt 2 -->
+                <div id="alt2">
+                    <input type="radio" name="${student.name}" value="">
+                    <label for="${student.name}">Answer 2</label>
+                </div>
+                <!-- alt 3 -->
+                <div id="alt3">
+                    <input type="radio" name="${student.name}" value="">
+                    <label for="${student.name}">Answer 3</label>
+                </div>
+                <!-- alt 4 -->
+                <div id="4">
+                    <input type="radio" name="${student.name}" value="">
+                    <label for="${student.name}">Answer 4</label>
+                </div>
+            </form>
         </div>
 
     </div>
