@@ -49,7 +49,7 @@ let allStudents = [...students];
 shuffleArray(allStudents);
 let i = 0;
 let chosenStudents = 0;
-let quitGame = false;
+// let gameOn = false;
 const answBtnArray = [answ1Btn, answ2Btn, answ3Btn, answ4Btn];
 
 // console.log(allStudents);
@@ -69,53 +69,29 @@ quitBtn.addEventListener('click', () => {
 // på ngågot sätt, men vill ju inte få hela loopen på samma 
 // gång utan klicka och välja emellan
 const setUpNewGuess = () => {
-    // shuffleArray(chosenStudents); //sluta shuffla denna och shift() 
+    shuffleArray(chosenStudents); //sluta shuffla denna och shift() 
                                   // bort [0] hela tiden tills img är slut
                                   
     //Setting the first chosen image and starting game
     studentImage.setAttribute('src', chosenStudents[0].image);
 
     shuffleArray(answBtnArray);
-    //randomizing right answer button and avoiding doublets
+    //randomizing right answer button
     answBtnArray[0].innerHTML = `${chosenStudents[0].name}`;
-    // answBtnArray[1].innerHTML = `${allStudents[1].name}`;
-    // answBtnArray[2].innerHTML = `${allStudents[2].name}`;
-    // answBtnArray[3].innerHTML = `${allStudents[3].name}`;
+    answBtnArray[1].innerHTML = `${allStudents[1].name}`;
+    answBtnArray[2].innerHTML = `${allStudents[2].name}`;
+    answBtnArray[3].innerHTML = `${allStudents[3].name}`;
 
 
-    // trying to avoid doublets
- /*    // loop 1
-    if(answBtnArray[1].innerHTML === chosenStudents[0].name){
-        shuffleArray(allStudents);
-    } else if(answBtnArray[1].innerHTML !== chosenStudents[0].name){
-        answBtnArray[1].innerHTML = `${allStudents[1].name}`;
-    }
-
-    // loop 2
-    if(answBtnArray[2].innerHTML === chosenStudents[0].name){
-        shuffleArray(allStudents);
-    } else if(answBtnArray[2].innerHTML !== chosenStudents[0].name){
-        answBtnArray[2].innerHTML = `${allStudents[2].name}`;
-    }
-
-    // loop 3
-    if(answBtnArray[3].innerHTML === chosenStudents[0].name){
-        shuffleArray(allStudents);
-    } else if(answBtnArray[3].innerHTML !== chosenStudents[0].name){
-        answBtnArray[3].innerHTML = `${allStudents[3].name}`;
-    }
- */
-
-
-    // trying to avoid doublets
-    // får inte denna loop att funka
+    // trying to avoid doublets 
+/*   // loop som inte funkar mot dubletter
     for(i=1; i < answBtnArray.length; i++){
         if(answBtnArray[i].innerHTML === chosenStudents[0].name){
                 shuffleArray(allStudents);
         } else if(answBtnArray[i].innerHTML !== chosenStudents[0].name){
             answBtnArray[i].innerHTML = `${allStudents[i].name}`;
         }
-    }
+    } */
   
     //kan det skrivas såhär istället?
     
@@ -211,9 +187,10 @@ clickToChooseAmountOfStudents();
 // en funktion för 1 spelomgång 
 const gameOnFunc = () => {
     // while(quitGame === false){
-
+        // gameOn = true;
+        let totalGuesses = 0
         let rightGuesses = 0;
-        let totalGuesses = 0; 
+        
         // gameOn = true;
          // // Setting the first chosen image and starting game
         setUpNewGuess();
@@ -221,16 +198,16 @@ const gameOnFunc = () => {
         showAnswBtnsWhenStart(); 
         // 
         // gameOn = true;
-        // while(gameOn) { //for(let i = 0; i <= chosenStudents.length; i++){ //denna while vill jag ju loopa tills chosenStudents tar slut. ska det göras med en for-loop istället? forEach?
+        // for(let totalGuesses = 0; totalGuesses < chosenStudents.length; totalGuesses++) { //for(let i = 0; i <= chosenStudents.length; i++){ //denna while vill jag ju loopa tills chosenStudents tar slut. ska det göras med en for-loop istället? forEach?
             // forEach se ovan        
                 // // hide startGameContainer and show studentImage + all game buttons
                 // showAnswBtnsWhenStart();
 
                 answContainer.addEventListener('click', (e) => {
 
-                    if(totalGuesses >= chosenStudents.length){
+                    if(totalGuesses > chosenStudents.length-1){
 
-                        quitGame = true;
+                        // gameOn = false;
                         //avsluta spel
                         console.log(`totalguesses of: ${totalGuesses} is reached`)
 
@@ -241,7 +218,7 @@ const gameOnFunc = () => {
                         // filtrera ut resterande false, eller bara se till att inte dublettnamn
                         // kommer(och därmed ändå inte kan klickas), vilket jag är tvungen att göra ändå.
                         console.log("You clicked the right name")
-                        chosenStudents.shift()
+                        // chosenStudents.shift()
                         rightGuesses ++;
                         totalGuesses ++; //behöver ej egentligen räkna dessa utan bara ta 
                                         //     chosenStudents.length för att veta hur många gissningar 
@@ -255,6 +232,7 @@ const gameOnFunc = () => {
 
                     } else if(e.target.innerHTML !== chosenStudents[0].name){
                         console.log("Clicked wrong name")
+                        // chosenStudents.shift()
                         totalGuesses ++;
                         // visa på ngt sätt att det var fel och skriv ut rätt svar 
                         // rätt svar:
@@ -264,11 +242,11 @@ const gameOnFunc = () => {
                         showAnswBtnsWhenStart();
 
                     } else if(e.target.innerHTML === 'Quit Game 😾'){
-                        console.log("Y U quit game?")
+                        console.log("Y U quit game?")                        
                         rightGuesses = 0;
                         totalGuesses = 0;
-                        gameOn = false;
-                        quitGame = true;
+                        // gameOn = false;
+                        // quitGame = true;
                         clickToChooseAmountOfStudents();
                     }
                 }); 
