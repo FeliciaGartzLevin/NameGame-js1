@@ -1,3 +1,24 @@
+/* 
+❗todos❗
+🔹Create a new branch from test-branch called Plan B,  
+    and overwrite after that the main files (html, css, js) with plan B files
+    if this solution works I will overwrite main with Plan B
+    either by copying and pasting or by pull request and solving merge conflicts
+    in this case be aware of changing pathway to student-images
+🔹Insert random names on answers
+🔹Avoid name doublets
+🔹Shuffle answers position https://youtu.be/ykszkgydoG4?t=1860
+🔹Hide choicebuttons + h2 text
+    after clicking until game starts again
+🔹Count right answers when submitting and render to HTML
+🔹Create an img for start-page
+🔹Make quit-button to reset points and go to start page
+🔹If time: create a scroll to top button: https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
+🔹If time: try posibility to restart game
+🔹 Change 3 of the values="" in form to a name from a shuffle of all names 
+     eg ${randomStudent}. answer2-4 shall be ${randomstudent} as well
+*/
+
 const largeWrapper = document.querySelector('.large-wrapper');
 const allBtn = document.querySelector('#allBtn');
 const tenBtn = document.querySelector('#tenBtn');
@@ -62,7 +83,6 @@ const renderGuesses = (chosenStudents) => {
             </div>
         </div>
         `;
-        
     });
 
 }
