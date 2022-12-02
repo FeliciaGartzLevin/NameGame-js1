@@ -1,17 +1,12 @@
 /* 
 ❗todos❗
-✅Create a new branch from test-branch called Plan B,  
-    and overwrite after that the main files (html, css, js) with plan B files
-    if this solution works I will overwrite main with Plan B
-    either by copying and pasting or by pull request and solving merge conflicts
-    in this case be aware of changing pathway to student-images
 🔹Insert random names on answers
 🔹Avoid name doublets
 🔹Shuffle answers position https://youtu.be/ykszkgydoG4?t=1860
 🔹Hide choicebuttons + h2 text
     after clicking until game starts again
 🔹Count right answers when submitting and render to HTML
-🔹Create an img for start-page
+✅Create an img for start-page
 🔹Make quit-button to reset points and go to start page
 🔹If time: create a scroll to top button: https://www.w3schools.com/howto/howto_js_scroll_to_top.asp
 🔹If time: try posibility to restart game
@@ -41,6 +36,7 @@ const allStudents = students.map( student => {
     return {name: student.name, image: student.image}
 }); */
 
+
 const renderGuesses = (chosenStudents) => {
 
     largeWrapper.innerHTML = "";
@@ -54,37 +50,39 @@ const renderGuesses = (chosenStudents) => {
         // template string och insert med ${radioBtn} 
         // eller slumpa position på annat sätt
         // https://www.youtube.com/watch?v=ykszkgydoG4&ab_channel=DGreenwood
-        
-        largeWrapper.innerHTML +=
-        `  
-        <div class="student-card m-4">
-            <img src="${student.image}" alt="Student in FED22M" >
-            <div id="" class="m-4 guess-template">
-                <!-- alt 1 -->
-                <div id="altOne" class="m-2 altOne radio-button">
-                    <input type="radio" name="${student.name}" value="${student.name}">
-                    <label for="${student.name}">${student.name}</label>
-                </div>
-                <!-- alt 2 -->
-                <div id="altTwo" class="m-2 altTwo radio-button">
-                    <input type="radio" name="${student.name}" value="${student.name}">
-                    <label for="${student.name}">Answer 2</label>
-                </div>
-                <!-- alt 3 -->
-                <div id="altThree" class="m-2 altThree radio-button">
-                    <input type="radio" name="${student.name}" value="${student.name}">
-                    <label for="${student.name}">Answer 3</label>
-                </div>
-                <!-- alt 4 -->
-                <div id="altFour" class="m-2 altFour radio-button">
-                    <input type="radio" name="${student.name}" value="${student.name}">
-                    <label for="${student.name}">Answer 4</label>
+        shuffleArray(allStudents);
+        if(allStudents[0].name && allStudents[1].name && allStudents[2].name !== student.name){
+            largeWrapper.innerHTML +=
+            `  
+            <div class="student-card m-4">
+                <img src="${student.image}" alt="Student in FED22M" >
+                <div id="" class="m-4 guess-template">
+                    <!-- alt 1 -->
+                    <div id="altOne" class="m-2 altOne radio-button">
+                        <input type="radio" name="${student.name}" value="${student.name}">
+                        <label for="${student.name}">${student.name}</label>
+                    </div>
+                    <!-- alt 2 -->
+                    <div id="altTwo" class="m-2 altTwo radio-button">
+                        <input type="radio" name="${student.name}" value="${allStudents[0].name}">
+                        <label for="${student.name}">${allStudents[0].name}</label>
+                    </div>
+                    <!-- alt 3 -->
+                    <div id="altThree" class="m-2 altThree radio-button">
+                        <input type="radio" name="${student.name}" value="${student.name[1].name}">
+                        <label for="${student.name}">${allStudents[1].name}</label>
+                    </div>
+                    <!-- alt 4 -->
+                    <div id="altFour" class="m-2 altFour radio-button">
+                        <input type="radio" name="${student.name}" value="${student.name[2].name}">
+                        <label for="${student.name}">${allStudents[2].name}</label>
+                    </div>
                 </div>
             </div>
-        </div>
-        `;
+            `;
+        }
     });
-
+        
 }
 
 
@@ -118,5 +116,7 @@ twentyBtn.addEventListener('click', e => {
 
 form.addEventListener('submit', e => {
     e.preventDefault();
+
+    //gör funktion för antal rätt utav alla + rendera till HTML
 
 });
