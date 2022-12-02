@@ -71,13 +71,19 @@ const setUpNewGuess = () => {
     shuffleArray(answBtnArray);
     //randomizing right answer button
     answBtnArray[0].innerHTML = `${chosenStudents[0].name}`;
+    allStudents.filter( student => {
+        return student.name !== chosenStudents[0]
+    });
     answBtnArray[1].innerHTML = `${allStudents[1].name}`;
     answBtnArray[2].innerHTML = `${allStudents[2].name}`;
     answBtnArray[3].innerHTML = `${allStudents[3].name}`;
-    //kan det skrivas såhär istället?
     
 // chosenStudents.map(student=> student.name); 
 // skickar ut namnen i en array
+
+// använd filter !== för att få ut namn som inte är som 
+// det rätta namnet = undvik dubletter
+
 
 }
 
