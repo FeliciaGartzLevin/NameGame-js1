@@ -71,7 +71,7 @@ quitBtn.addEventListener('click', () => {
 const setUpNewGuess = () => {
     shuffleArray(chosenStudents); //sluta shuffla denna och shift() 
                                   // bort [0] hela tiden tills img är slut
-                                  
+    shuffleArray(allStudents);                           
     //Setting the first chosen image and starting game
     studentImage.setAttribute('src', chosenStudents[0].image);
 
@@ -79,7 +79,7 @@ const setUpNewGuess = () => {
     //randomizing right answer button
     answBtnArray[0].innerHTML = `${chosenStudents[0].name}`;
     allStudents.filter( student => {
-        return student.name !== chosenStudents[0]
+        return student.name !== chosenStudents[0].name
     });
     answBtnArray[1].innerHTML = `${allStudents[1].name}`;
     answBtnArray[2].innerHTML = `${allStudents[2].name}`;
@@ -88,36 +88,9 @@ const setUpNewGuess = () => {
     
 // chosenStudents.map(student=> student.name); 
 // skickar ut namnen i en array
-
-
-// det räcker inte med innerHTML om man vill undvika dubbletter
-// kan antingen ge gissad student guessedOn=true och 
-// filtrera ut resterande false, eller bara se till att inte dublettnamn
-// kommer(och därmed ändå inte kan klickas), vilket jag är tvungen att göra ändå.
-                        
+          
 }
 
-/* 
-forEach som inte funkar:
-const setUpNewGuess = (chosenStudents) => {
-chosenStudents.forEach(chosenStudent => {
-   
-    //Setting the first chosen image and starting game
-    studentImage.setAttribute('src', chosenStudents[chosenStudent].image);
-
-    shuffleArray(answBtnArray);
-    //randomizing right answer button
-    answBtnArray[0].innerHTML = `${chosenStudents[chosenStudent].name}`;
-    answBtnArray[1].innerHTML = `${allStudents[1].name}`;
-    answBtnArray[2].innerHTML = `${allStudents[2].name}`;
-    answBtnArray[3].innerHTML = `${allStudents[3].name}`;
-
-// använd filter !== för att få ut namn som inte är som 
-// det rätta namnet = undvik dubletter
-
-
-}
-}*/
 
 
 //choose between ALL, 10 or 20 guesses
