@@ -12,6 +12,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 
@@ -82,13 +83,87 @@ img{
 }
 
 .answers-container{
-    margin: 2rem;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
     justify-content: center;
-    
+    display: flex;
+    flex-direction: column;
 }
+
+/* gör answContainer responsiv i 3 delar
+lägg en bakgrundsbild på bodyn with norepeat
+och opacitet
+ grid-template-areas: 
+        "a"
+        "b"
+        "c"
+        "d"; 
+
+ display: grid;
+        grid-template-areas: 
+        "a b"
+        "c d";
+*/
+
+
+@media screen and (max-width: 500px){
+    .answers-container{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    #answ1{
+        grid-area: a;
+    }
+    #answ2{
+        grid-area: b;
+    }
+    #answ3{
+        grid-area: c;
+    }
+    #answ4{
+        grid-area: d;
+    }
+}
+@media screen and (min-width: 500px){
+    .answers-container{
+        display: grid;
+        grid-template-areas: 
+        "a b"
+        "c d";
+    }
+    #answ1{
+        grid-area: a;
+    }
+    #answ2{
+        grid-area: b;
+    }
+    #answ3{
+        grid-area: c;
+    }
+    #answ4{
+        grid-area: d;
+    }
+}
+@media screen and (min-width: 1000px){
+    .answers-container{
+        display: grid;
+        grid-template-areas: 
+        "a b c d";
+    }
+    #answ1{
+        grid-area: a;
+    }
+    #answ2{
+        grid-area: b;
+    }
+    #answ3{
+        grid-area: c;
+    }
+    #answ4{
+        grid-area: d;
+    }
+}
+
+
 
 .answer-btns{
     display: none;
@@ -106,6 +181,15 @@ img{
 
 .answer-btns:hover{
     background: #B81365;
+}
+
+.answers-container p{
+    margin: 1rem;
+    font-size: 1rem;
+}
+
+.answers-container p span{
+    font-size: 1.5rem;
 }
 
 .quit-btn{

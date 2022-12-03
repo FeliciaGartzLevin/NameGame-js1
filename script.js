@@ -1,14 +1,7 @@
-// I värsta fall om allt skiter sig så får jag göra en 
-// HTML-lista med valda bilder där det finns 4 radiobtns 
-// som val på varje och en submit-knapp längst ner som 
-// räknar ihop poängen sen
-//typ se Ninja Quiz
-
-// FIXA ✅
-// när jag klickar på start-buttons (addeventlistener)
-// så vill jag dölja elementet start-game-btn-container 
-// och visa image + answers+quit-buttons setAttribute('display=none/block')
-
+/* todo: visa rätt svar någonstans
+kanske bara Rätt! eller Fel: detta är `${chosenStudents[studentIndex].name}`
+gör ett klick event för quit-knappen
+ */
 // query the guess-buttons
 const guessAllBtn = document.querySelector('#btn-guess-all');
 const guessTenBtn = document.querySelector('#btn-guess-ten');
@@ -22,12 +15,12 @@ const answ2Btn = document.querySelector('#answ2');
 const answ3Btn = document.querySelector('#answ3');
 const answ4Btn = document.querySelector('#answ4');
 const answContainer = document.querySelector('.answers-container');
+const gameEnded = document.querySelector('.gameEnded');
 
 const showAnswBtnsWhenStart = () => {
     //gör en funktion här som jag kan kalla på för varje startklick (all, 10,20 val)
     startGameContainer.style = 'display: none';
     studentImage.style = 'display: block';
-    answBtns.style = 'display: block';
     answBtns.forEach( answBtn => {
        return answBtn.style = 'display: block';
     }); 
@@ -44,6 +37,7 @@ const shuffleArray = (array) => {
 }
 
 //cloning the students array into a new array
+// in order to keep the original array intact
 let allStudents = [...students];
 
 shuffleArray(allStudents);
@@ -51,30 +45,13 @@ let i = 0;
 let chosenStudents = 0;
 let amountOfGuesses = 0;
 let studentIndex = 0;
-// let gameOn = false;
+
 const answBtnArray = [answ1Btn, answ2Btn, answ3Btn, answ4Btn];
 
-// console.log(allStudents);
- 
-// kanske en while som omsluter all nedan kod som i guess the number 
-// där man gör booleans för att avsluta och starta spel? 
-// Då leder quit button till "startsidan" med att välja antal gissningar igen
-//någonting sånthär?:
-/* const gameOn=true;
-quitBtn.addEventListener('click', () => {
-    gameOn=false;
-}); */
 
-//-------CLICK BUTTONS IN THE BEGINNING AND CHOOSE HOW MANY STUDENTS TO GUESS ON------
-
-// Måste loopa över denna enligt vald mängd gissningar
-// på ngågot sätt, men vill ju inte få hela loopen på samma 
-// gång utan klicka och välja emellan
 const setUpNewGuess = () => {
-    // shuffleArray(chosenStudents); //sluta shuffla denna och shift() 
-                                  // bort [0] hela tiden tills img är slut
     shuffleArray(allStudents);                           
-    //Setting the first chosen image and starting game
+    //Setting the chosen image to HTML
     studentImage.setAttribute('src', chosenStudents[studentIndex].image);
 
     shuffleArray(answBtnArray);
@@ -87,10 +64,7 @@ const setUpNewGuess = () => {
     answBtnArray[1].innerHTML = `${allRandomStudents[1].name}`;
     answBtnArray[2].innerHTML = `${allRandomStudents[2].name}`;
     answBtnArray[3].innerHTML = `${allRandomStudents[3].name}`;
-          
 }
-
-
 
 //choose between ALL, 10 or 20 guesses
 const clickToChooseAmountOfStudents = () => {
@@ -104,10 +78,10 @@ const clickToChooseAmountOfStudents = () => {
 
         gameOnFunc();
     });
-    guessTenBtn.addEventListener('click', () => { // kan man skriva guessTenBtn.addEventListener('click', () => {}); och returnera värdet från en if-sats ist?
+    guessTenBtn.addEventListener('click', () => { 
         //välj 10 slumpade studenter och starta spel
-        chosenStudents = allStudents.slice(0,10); //slumpa ut 10 stycken and slice()? out the 10 first? eller borde finnas en annan metod .filter[0-9]? + .map(student.name) för att få ut namnen 
-        amountOfGuesses = chosenStudents.length; //eller 10
+        chosenStudents = allStudents.slice(0,10); 
+        amountOfGuesses = chosenStudents.length; 
 
         console.log('"10" is clicked');
 
@@ -131,22 +105,10 @@ let totalGuesses = 0;
 let rightGuesses = 0;
 // en funktion för 1 spelomgång 
 const gameOnFunc = () => {
-   
-
-     // // Setting the first chosen image and starting game
+    // Setting img and randomizing answerbuttons    
     setUpNewGuess();
-    // // hide startGameContainer and show studentImage + all game buttons
+    // hide startGameContainer and show studentImage + all game buttons
     showAnswBtnsWhenStart(); 
-
-   /*  // kan man göra en if-sats
-     else if(e.target.innerHTML === chosenStudents[studentIndex].name &&){
-        samma som i gissa rätt men att totalguesses inte blir ++?
-        nej. egetligen måste jag få ett 11e klick för att komma in i 
-        if(totalGuesses >= amountOfGuesses){} och då gör jag ju en extra gissning
-        jag skulle behövt if(totalGuesses >= amountOfGuesses)
-        utanför och efter. hmm kanske som en funktion??
-
-    } */
 
     answContainer.addEventListener('click', (e) => {
         if(e.target.innerHTML === chosenStudents[studentIndex].name) { //
@@ -156,11 +118,11 @@ const gameOnFunc = () => {
             // skriv ut på något sätt att det är rätt svar:
             // kan kanske bara skriva i ett htmlEl under bilden 
             // så det inte blir bökigt
-            // chosenStudents.shift()
             studentIndex++;
+            // showing result if game is finished
             ifGameFinished();
+            
             setUpNewGuess();
-            // // hide startGameContainer and show studentImage + all game buttons
             showAnswBtnsWhenStart();
         } else if(e.target.innerHTML !== chosenStudents[studentIndex].name){
             console.log("Clicked wrong name")
@@ -168,14 +130,13 @@ const gameOnFunc = () => {
             totalGuesses ++;
             // visa på ngt sätt att det var fel och skriv ut rätt svar 
             // rätt svar:
-            // chosenStudents.shift();
             studentIndex++;
             ifGameFinished();
             setUpNewGuess();
-            // hide startGameContainer and show studentImage + all game buttons
             showAnswBtnsWhenStart();
-        } else if(e.target.innerHTML === 'Quit Game 😾'){
-            // targeta denna m dataset-* attribut?
+        } else if(e.target.innerHTML.includes('Quit Game')){
+            // denna ingår inte i answContainer, 
+            // behöver göra ett nytt click-event för denna
             console.log("Y U quit game?")                        
             rightGuesses = 0;
             totalGuesses = 0;
@@ -188,10 +149,17 @@ const gameOnFunc = () => {
 
 const ifGameFinished = () => {
     if(totalGuesses >= amountOfGuesses){
+        answBtns.forEach( answBtn => {
+            return answBtn.setAttribute('disabled', 'disabled');
+         }); 
+        answContainer.setAttribute('disabled', 'disabled');
         //avsluta spel och visa resultat
         studentImage.setAttribute('src', 'http://placekitten.com/300/300');
+        // answContainer.classList.add('hide');
+        // answBtns.classList.add('hide');
+        // gameEnded.classList.remove('hide');
         answContainer.innerHTML = `
-        <p>You made ${rightGuesses} right guesses out of ${totalGuesses} total guesses</p>
+        <p>You made <span>${rightGuesses}</span> right guesses out of <span>${totalGuesses}</span> total guesses</p>
         `; 
     
         console.log(`totalguesses of: ${totalGuesses} is reached`);
@@ -199,15 +167,11 @@ const ifGameFinished = () => {
     }  
 }
 
+/* // Kända buggar (att meddela Johan):
+Spelet slutar inte att resgistrera klick på answContainer
+när spelet slutat
+ */
 
-
-// Hur kan jag få spelet att köra 
-// om och om igen igenom valt antal elever?
-// något med while(gameOn && totalGuesses <= chosenStudents.length)
-// kanske? (se while-loopen ovan)
-
-//how to write total score: `you've got ${rightGuesses}/${totalGuesses} right!`
-// make an htmlEl to print this in
 
 // EXTRAPILL vid rätt och fel svar, om jag hinner:
 
