@@ -1,51 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Name Game</title>
 
-	<!-- Bootstrap 5.2 -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- Bootstrap 5.2 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
 
-	<!-- Styles -->
-	<link rel="stylesheet" href="style.css">
-
-</head>
-<body>
-
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <!-- OBS! Gör den responsiv i minst 3 nivåer 
     innan jag lämnar in, antingen med CSS eller Bootstrap  -->
-    
+
     <h1>Name Game</h1>
-    <p class="description">Who is it in the picture? Click the correct name and gain points 🥳</p>
+    <p class="description">
+      Who is it in the picture? Click the correct name and gain points 🥳
+    </p>
 
     <div class="image-container">
-        <div id="start-game-container" class="start-game-container">
-            <p>How many students do you want to guess on?</p>
-            <div class="start-game-btn-container">
-                <button id="btn-guess-all" class="start-game-btn">All</button>
-                <button id="btn-guess-ten" class="start-game-btn">10</button>
-                <button id="btn-guess-twenty" class="start-game-btn">20</button>
-            </div>
+      <div id="start-game-container" class="start-game-container">
+        <p>How many students do you want to guess on?</p>
+        <div class="start-game-btn-container">
+          <button type="button" id="btn-guess-all" class="start-game-btn">
+            All
+          </button>
+          <button type="button" id="btn-guess-ten" class="start-game-btn">
+            10
+          </button>
+          <button type="button" id="btn-guess-twenty" class="start-game-btn">
+            20
+          </button>
         </div>
+      </div>
 
-            <img id="student-image" src="" alt="Student from FED22" id="image">
+      <img id="student-image" src="" alt="Student from FED22" id="image" />
     </div>
 
     <div class="answers-container">
-        <button id="answ1" class="answer-btns">Answer 1</button>
-        <button id="answ2" class="answer-btns">Answer 2</button>
-        <button id="answ3" class="answer-btns">Answer 3</button>
-        <button id="answ4" class="answer-btns">Answer 4</button>
+      <button id="answ1" class="answer-btns">Answer 1</button>
+      <button id="answ2" class="answer-btns">Answer 2</button>
+      <button id="answ3" class="answer-btns">Answer 3</button>
+      <button id="answ4" class="answer-btns">Answer 4</button>
     </div>
-    
+
     <button id="quit-btn" class="quit-btn">Quit Game 😾</button>
 
-
-    
     <script src="students.js"></script>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
