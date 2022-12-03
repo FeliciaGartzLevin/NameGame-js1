@@ -147,10 +147,11 @@ const clickToChooseAmountOfStudents = () => {
 
 clickToChooseAmountOfStudents();
 
+let totalGuesses = 0;
+let rightGuesses = 0;
 // en funktion för 1 spelomgång 
 const gameOnFunc = () => {
-    let totalGuesses = 1;
-    let rightGuesses = 0;
+   
 
      // // Setting the first chosen image and starting game
     setUpNewGuess();
@@ -160,21 +161,15 @@ const gameOnFunc = () => {
    /*  // kan man göra en if-sats
      else if(e.target.innerHTML === chosenStudents[studentIndex].name &&){
         samma som i gissa rätt men att totalguesses inte blir ++?
-        nej. egetligen måste jag få ett 11e klick
-        
+        nej. egetligen måste jag få ett 11e klick för att komma in i 
+        if(totalGuesses >= amountOfGuesses){} och då gör jag ju en extra gissning
+        jag skulle behövt if(totalGuesses >= amountOfGuesses)
+        utanför och efter. hmm kanske som en funktion??
+
     } */
 
     answContainer.addEventListener('click', (e) => {
-        if(totalGuesses >= amountOfGuesses){
-            //avsluta spel och visa resultat
-            studentImage.setAttribute('src', 'http://placekitten.com/300/300');
-            answContainer.innerHTML = `
-            <p>You made ${rightGuesses} right guesses out of ${totalGuesses} total guesses</p>
-            `;
-        
-            console.log(`totalguesses of: ${totalGuesses} is reached`)
-        
-        }else if(e.target.innerHTML === chosenStudents[studentIndex].name) { //
+        if(e.target.innerHTML === chosenStudents[studentIndex].name) { //
             console.log("You clicked the right name")
             rightGuesses ++;
             totalGuesses ++; 
@@ -183,9 +178,10 @@ const gameOnFunc = () => {
             // så det inte blir bökigt
             // chosenStudents.shift()
             studentIndex++;
+            gameFinished();
             setUpNewGuess();
             // // hide startGameContainer and show studentImage + all game buttons
-            showAnswBtnsWhenStart() 
+            showAnswBtnsWhenStart();
         } else if(e.target.innerHTML !== chosenStudents[studentIndex].name){
             console.log("Clicked wrong name")
             // chosenStudents.shift()
@@ -194,9 +190,10 @@ const gameOnFunc = () => {
             // rätt svar:
             // chosenStudents.shift();
             studentIndex++;
+            gameFinished();
             setUpNewGuess();
             // hide startGameContainer and show studentImage + all game buttons
-            showAnswBtnsWhenStart() 
+            showAnswBtnsWhenStart();
         } else if(e.target.innerHTML === 'Quit Game 😾'){
             // targeta denna m dataset-* attribut?
             console.log("Y U quit game?")                        
@@ -207,6 +204,18 @@ const gameOnFunc = () => {
             clickToChooseAmountOfStudents();
         }
     });
+}
+
+const gameFinished = () => {
+    if(totalGuesses >= amountOfGuesses){
+        //avsluta spel och visa resultat
+        studentImage.setAttribute('src', 'http://placekitten.com/300/300');
+        answContainer.innerHTML = `
+        <p>You made ${rightGuesses} right guesses out of ${totalGuesses} total guesses</p>
+        `;
+    
+        console.log(`totalguesses of: ${totalGuesses} is reached`)
+    }  
 }
 
 
