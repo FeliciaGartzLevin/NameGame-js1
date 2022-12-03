@@ -50,11 +50,12 @@ shuffleArray(allStudents);
 let i = 0;
 let chosenStudents = 0;
 let amountOfGuesses = 0;
+let studentIndex = 0;
 // let gameOn = false;
 const answBtnArray = [answ1Btn, answ2Btn, answ3Btn, answ4Btn];
 
 // console.log(allStudents);
-
+ 
 // kanske en while som omsluter all nedan kod som i guess the number 
 // där man gör booleans för att avsluta och starta spel? 
 // Då leder quit button till "startsidan" med att välja antal gissningar igen
@@ -70,18 +71,18 @@ quitBtn.addEventListener('click', () => {
 // på ngågot sätt, men vill ju inte få hela loopen på samma 
 // gång utan klicka och välja emellan
 const setUpNewGuess = () => {
-    shuffleArray(chosenStudents); //sluta shuffla denna och shift() 
+    // shuffleArray(chosenStudents); //sluta shuffla denna och shift() 
                                   // bort [0] hela tiden tills img är slut
     shuffleArray(allStudents);                           
     //Setting the first chosen image and starting game
-    studentImage.setAttribute('src', chosenStudents[0].image);
+    studentImage.setAttribute('src', chosenStudents[studentIndex].image);
 
     shuffleArray(answBtnArray);
     //randomizing right answer button
-    answBtnArray[0].innerHTML = `${chosenStudents[0].name}`;
+    answBtnArray[0].innerHTML = `${chosenStudents[studentIndex].name}`;
     
     let allRandomStudents = allStudents.filter( student => {
-        return student.name !== chosenStudents[0].name
+        return student.name !== chosenStudents[studentIndex].name
     });
     answBtnArray[1].innerHTML = `${allRandomStudents[1].name}`;
     answBtnArray[2].innerHTML = `${allRandomStudents[2].name}`;
@@ -120,7 +121,7 @@ const clickToChooseAmountOfStudents = () => {
         //slumpa 10 studenter och starta spel
             // slumpa med Fisher-Yates ✅
         chosenStudents = allStudents.slice(0,11); //slumpa ut 10 stycken and slice()? out the 10 first? eller borde finnas en annan metod .filter[0-9]? + .map(student.name) för att få ut namnen 
-        amountOfGuesses = chosenStudents.length; //eller 10
+        amountOfGuesses = chosenStudents.length-1; //eller 10
 
         // //hide startGameContainer and show studentImage + all game buttons
         // showAnswBtnsWhenStart();
@@ -133,7 +134,7 @@ const clickToChooseAmountOfStudents = () => {
     //slumpa 20 bilder och starta spel
         // slumpa med Fisher-Yates
         chosenStudents = allStudents.slice(0,21); //slumpa ut 10 stycken
-        amountOfGuesses = chosenStudents.length;
+        amountOfGuesses = chosenStudents.length-1;
         //Setting the first chosen image and starting game
         // setUpNewGuess();
         //hide startGameContainer and show studentImage + all game buttons
@@ -148,53 +149,56 @@ clickToChooseAmountOfStudents();
 
 // en funktion för 1 spelomgång 
 const gameOnFunc = () => {
-    let totalGuesses = 0
+    let totalGuesses = 1;
     let rightGuesses = 0;
-
 
      // // Setting the first chosen image and starting game
     setUpNewGuess();
     // // hide startGameContainer and show studentImage + all game buttons
     showAnswBtnsWhenStart(); 
 
-    answContainer.addEventListener('click', (e) => {
-        if(totalGuesses > amountOfGuesses.length-1){
-            //avsluta spel
-            answContainer.classList.add('hide');
+   /*  // kan man göra en if-sats
+     else if(e.target.innerHTML === chosenStudents[studentIndex].name &&){
+        samma som i gissa rätt men att totalguesses inte blir ++?
+        nej. egetligen måste jag få ett 11e klick
+        
+    } */
 
-            //stoppa knappen från att submitta fler gissningar.
-            // se från någon workshop nyligen. tror guess the 
-            // number nyaste versionen
+    answContainer.addEventListener('click', (e) => {
+        if(totalGuesses >= amountOfGuesses){
+            //avsluta spel och visa resultat
+            studentImage.setAttribute('src', 'http://placekitten.com/300/300');
+            answContainer.innerHTML = `
+            <p>You made ${rightGuesses} right guesses out of ${totalGuesses} total guesses</p>
+            `;
+        
             console.log(`totalguesses of: ${totalGuesses} is reached`)
         
-        }  else if(e.target.innerHTML === chosenStudents[0].name) { //
-            // det räcker inte med innerHTML om man vill undvika dubbletter
-            // kan antingen ge gissad student guessedOn =true och 
-            // filtrera ut resterande false, eller bara se till att inte dublettnamn
-            // kommer(och därmed ändå inte kan klickas), vilket jag är tvungen att göra ändå.
+        }else if(e.target.innerHTML === chosenStudents[studentIndex].name) { //
             console.log("You clicked the right name")
             rightGuesses ++;
-            totalGuesses ++; //behöver ej egentligen räkna dessa utan bara ta 
-                            //     chosenStudents.length för att veta hur många gissningar 
-                            //     det blir, men vet ej hur jag ska få chosenStudents utanför scopet
+            totalGuesses ++; 
             // skriv ut på något sätt att det är rätt svar:
             // kan kanske bara skriva i ett htmlEl under bilden 
             // så det inte blir bökigt
-            chosenStudents.shift()
+            // chosenStudents.shift()
+            studentIndex++;
             setUpNewGuess();
             // // hide startGameContainer and show studentImage + all game buttons
             showAnswBtnsWhenStart() 
-        } else if(e.target.innerHTML !== chosenStudents[0].name){
+        } else if(e.target.innerHTML !== chosenStudents[studentIndex].name){
             console.log("Clicked wrong name")
             // chosenStudents.shift()
             totalGuesses ++;
             // visa på ngt sätt att det var fel och skriv ut rätt svar 
             // rätt svar:
-            chosenStudents.shift();
+            // chosenStudents.shift();
+            studentIndex++;
             setUpNewGuess();
             // hide startGameContainer and show studentImage + all game buttons
             showAnswBtnsWhenStart() 
         } else if(e.target.innerHTML === 'Quit Game 😾'){
+            // targeta denna m dataset-* attribut?
             console.log("Y U quit game?")                        
             rightGuesses = 0;
             totalGuesses = 0;
@@ -204,8 +208,6 @@ const gameOnFunc = () => {
         }
     });
 }
-
-
 
 
 
