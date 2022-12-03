@@ -97,7 +97,7 @@ const clickToChooseAmountOfStudents = () => {
 
     guessAllBtn.addEventListener('click', () => {
         //välj ALLA studenter och starta spel
-        chosenStudents = allStudents; 
+        chosenStudents = allStudents.slice(0); 
         amountOfGuesses = chosenStudents.length;
 
         console.log('"All" is clicked');
