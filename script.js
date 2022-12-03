@@ -100,45 +100,25 @@ const clickToChooseAmountOfStudents = () => {
         chosenStudents = allStudents; 
         amountOfGuesses = chosenStudents.length;
 
-        // showAnswBtnsWhenStart();
         console.log('"All" is clicked');
 
-        // gameOn = true;
         gameOnFunc();
-
-        // får ev fortsätta hela spelet 
-        // här inne i respektive scope? 
-        // Kan ta funktioner från utsidan 
-        // och sätta in för att kunna använda 
-        // chosenStudents nya värde.
-        // annars en callback funktion:
-        // se weather app app.js renderCurrentWeather(data);
-        // där jag sätter in chosenStudent som parameter
-        // typ setUpNewGuess(chosenStudents); kanske?
-        
     });
     guessTenBtn.addEventListener('click', () => { // kan man skriva guessTenBtn.addEventListener('click', () => {}); och returnera värdet från en if-sats ist?
-        //slumpa 10 studenter och starta spel
-            // slumpa med Fisher-Yates ✅
-        chosenStudents = allStudents.slice(0,11); //slumpa ut 10 stycken and slice()? out the 10 first? eller borde finnas en annan metod .filter[0-9]? + .map(student.name) för att få ut namnen 
-        amountOfGuesses = chosenStudents.length-1; //eller 10
+        //välj 10 slumpade studenter och starta spel
+        chosenStudents = allStudents.slice(0,10); //slumpa ut 10 stycken and slice()? out the 10 first? eller borde finnas en annan metod .filter[0-9]? + .map(student.name) för att få ut namnen 
+        amountOfGuesses = chosenStudents.length; //eller 10
 
-        // //hide startGameContainer and show studentImage + all game buttons
-        // showAnswBtnsWhenStart();
         console.log('"10" is clicked');
 
         gameOnFunc();
             
     });
     guessTwentyBtn.addEventListener('click', () => {
-    //slumpa 20 bilder och starta spel
-        // slumpa med Fisher-Yates
-        chosenStudents = allStudents.slice(0,21); //slumpa ut 10 stycken
-        amountOfGuesses = chosenStudents.length-1;
-        //Setting the first chosen image and starting game
-        // setUpNewGuess();
-        //hide startGameContainer and show studentImage + all game buttons
-        // showAnswBtnsWhenStart();
+        //välj 20 slumpade studenter och starta spel
+        chosenStudents = allStudents.slice(0,20); //slumpa ut 10 stycken
+        amountOfGuesses = chosenStudents.length;
+        
         console.log('"20" is clicked');
 
         gameOnFunc();
@@ -178,7 +158,7 @@ const gameOnFunc = () => {
             // så det inte blir bökigt
             // chosenStudents.shift()
             studentIndex++;
-            gameFinished();
+            ifGameFinished();
             setUpNewGuess();
             // // hide startGameContainer and show studentImage + all game buttons
             showAnswBtnsWhenStart();
@@ -190,7 +170,7 @@ const gameOnFunc = () => {
             // rätt svar:
             // chosenStudents.shift();
             studentIndex++;
-            gameFinished();
+            ifGameFinished();
             setUpNewGuess();
             // hide startGameContainer and show studentImage + all game buttons
             showAnswBtnsWhenStart();
@@ -206,15 +186,16 @@ const gameOnFunc = () => {
     });
 }
 
-const gameFinished = () => {
+const ifGameFinished = () => {
     if(totalGuesses >= amountOfGuesses){
         //avsluta spel och visa resultat
         studentImage.setAttribute('src', 'http://placekitten.com/300/300');
         answContainer.innerHTML = `
         <p>You made ${rightGuesses} right guesses out of ${totalGuesses} total guesses</p>
-        `;
+        `; 
     
-        console.log(`totalguesses of: ${totalGuesses} is reached`)
+        console.log(`totalguesses of: ${totalGuesses} is reached`);
+        return;
     }  
 }
 
