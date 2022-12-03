@@ -95,13 +95,10 @@ const setUpNewGuess = () => {
 const clickToChooseAmountOfStudents = () => {
 
     guessAllBtn.addEventListener('click', () => {
-        //välj ALLA studenter ✅ och starta spel
+        //välj ALLA studenter och starta spel
         chosenStudents = allStudents; 
         amountOfGuesses = chosenStudents.length;
-        // //  //Setting the first chosen image and starting game
-        //  setUpNewGuess();
 
-        // //hide startGameContainer and show studentImage + all game buttons ✅
         // showAnswBtnsWhenStart();
         console.log('"All" is clicked');
 
@@ -124,16 +121,13 @@ const clickToChooseAmountOfStudents = () => {
             // slumpa med Fisher-Yates ✅
         chosenStudents = allStudents.slice(0,11); //slumpa ut 10 stycken and slice()? out the 10 first? eller borde finnas en annan metod .filter[0-9]? + .map(student.name) för att få ut namnen 
         amountOfGuesses = chosenStudents.length; //eller 10
-        //Setting the first chosen image and answBtns
-        // setUpNewGuess();
 
         // //hide startGameContainer and show studentImage + all game buttons
         // showAnswBtnsWhenStart();
         console.log('"10" is clicked');
 
-        // gameOn = true;
         gameOnFunc();
-        
+            
     });
     guessTwentyBtn.addEventListener('click', () => {
     //slumpa 20 bilder och starta spel
@@ -167,6 +161,7 @@ const gameOnFunc = () => {
         if(totalGuesses > amountOfGuesses.length-1){
             //avsluta spel
             answContainer.classList.add('hide');
+
             //stoppa knappen från att submitta fler gissningar.
             // se från någon workshop nyligen. tror guess the 
             // number nyaste versionen
@@ -210,13 +205,6 @@ const gameOnFunc = () => {
     });
 }
 
-
-// hur kan jag få med det valda värdet ovan ut ur scopet i 
-// variabeln chosenStudents och använda det? 
-// tror jag har det nu iom funktionen. För i konsolen
-// så ser jag mitt valda värde när jag skriver in chosenStudents
-// console.log(chosenStudents); // hinner ej klicka på knapparna 
-// innan denna skrivs ut i konsolen som undefined
 
 
 
