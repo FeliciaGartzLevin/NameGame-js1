@@ -78,25 +78,17 @@ const setUpNewGuess = () => {
     shuffleArray(answBtnArray);
     //randomizing right answer button
     answBtnArray[0].innerHTML = `${chosenStudents[0].name}`;
+    allStudents.filter( student => {
+        return student.name !== chosenStudents[0]
+    });
     answBtnArray[1].innerHTML = `${allStudents[1].name}`;
     answBtnArray[2].innerHTML = `${allStudents[2].name}`;
     answBtnArray[3].innerHTML = `${allStudents[3].name}`;
 
-
-    // trying to avoid doublets 
-/*   // loop som inte funkar mot dubletter
-    for(i=1; i < answBtnArray.length; i++){
-        if(answBtnArray[i].innerHTML === chosenStudents[0].name){
-                shuffleArray(allStudents);
-        } else if(answBtnArray[i].innerHTML !== chosenStudents[0].name){
-            answBtnArray[i].innerHTML = `${allStudents[i].name}`;
-        }
-    } */
-  
-    //kan det skrivas såhär istället?
     
 // chosenStudents.map(student=> student.name); 
 // skickar ut namnen i en array
+
 
 // det räcker inte med innerHTML om man vill undvika dubbletter
 // kan antingen ge gissad student guessedOn=true och 
@@ -119,6 +111,11 @@ chosenStudents.forEach(chosenStudent => {
     answBtnArray[1].innerHTML = `${allStudents[1].name}`;
     answBtnArray[2].innerHTML = `${allStudents[2].name}`;
     answBtnArray[3].innerHTML = `${allStudents[3].name}`;
+
+// använd filter !== för att få ut namn som inte är som 
+// det rätta namnet = undvik dubletter
+
+
 }
 }*/
 
