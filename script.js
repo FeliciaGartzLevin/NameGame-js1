@@ -49,6 +49,7 @@ let allStudents = [...students];
 shuffleArray(allStudents);
 let i = 0;
 let chosenStudents = 0;
+let amountOfGuesses = 0;
 // let gameOn = false;
 const answBtnArray = [answ1Btn, answ2Btn, answ3Btn, answ4Btn];
 
@@ -78,16 +79,13 @@ const setUpNewGuess = () => {
     shuffleArray(answBtnArray);
     //randomizing right answer button
     answBtnArray[0].innerHTML = `${chosenStudents[0].name}`;
-    allStudents.filter( student => {
+    
+    let allRandomStudents = allStudents.filter( student => {
         return student.name !== chosenStudents[0].name
     });
-    answBtnArray[1].innerHTML = `${allStudents[1].name}`;
-    answBtnArray[2].innerHTML = `${allStudents[2].name}`;
-    answBtnArray[3].innerHTML = `${allStudents[3].name}`;
-
-    
-// chosenStudents.map(student=> student.name); 
-// skickar ut namnen i en array
+    answBtnArray[1].innerHTML = `${allRandomStudents[1].name}`;
+    answBtnArray[2].innerHTML = `${allRandomStudents[2].name}`;
+    answBtnArray[3].innerHTML = `${allRandomStudents[3].name}`;
           
 }
 
@@ -99,7 +97,7 @@ const clickToChooseAmountOfStudents = () => {
     guessAllBtn.addEventListener('click', () => {
         //välj ALLA studenter ✅ och starta spel
         chosenStudents = allStudents; 
-        
+        amountOfGuesses = chosenStudents.length;
         // //  //Setting the first chosen image and starting game
         //  setUpNewGuess();
 
@@ -124,8 +122,8 @@ const clickToChooseAmountOfStudents = () => {
     guessTenBtn.addEventListener('click', () => { // kan man skriva guessTenBtn.addEventListener('click', () => {}); och returnera värdet från en if-sats ist?
         //slumpa 10 studenter och starta spel
             // slumpa med Fisher-Yates ✅
-        chosenStudents = allStudents.slice(0,10); //slumpa ut 10 stycken and slice()? out the 10 first? eller borde finnas en annan metod .filter[0-9]? + .map(student.name) för att få ut namnen 
-
+        chosenStudents = allStudents.slice(0,11); //slumpa ut 10 stycken and slice()? out the 10 first? eller borde finnas en annan metod .filter[0-9]? + .map(student.name) för att få ut namnen 
+        amountOfGuesses = chosenStudents.length; //eller 10
         //Setting the first chosen image and answBtns
         // setUpNewGuess();
 
@@ -140,8 +138,8 @@ const clickToChooseAmountOfStudents = () => {
     guessTwentyBtn.addEventListener('click', () => {
     //slumpa 20 bilder och starta spel
         // slumpa med Fisher-Yates
-        chosenStudents = allStudents.slice(0,20); //slumpa ut 10 stycken
-            
+        chosenStudents = allStudents.slice(0,21); //slumpa ut 10 stycken
+        amountOfGuesses = chosenStudents.length;
         //Setting the first chosen image and starting game
         // setUpNewGuess();
         //hide startGameContainer and show studentImage + all game buttons
@@ -156,73 +154,60 @@ clickToChooseAmountOfStudents();
 
 // en funktion för 1 spelomgång 
 const gameOnFunc = () => {
-    // while(quitGame === false){
-        // gameOn = true;
-        let totalGuesses = 0
-        let rightGuesses = 0;
+    let totalGuesses = 0
+    let rightGuesses = 0;
+
+
+     // // Setting the first chosen image and starting game
+    setUpNewGuess();
+    // // hide startGameContainer and show studentImage + all game buttons
+    showAnswBtnsWhenStart(); 
+
+    answContainer.addEventListener('click', (e) => {
+        if(totalGuesses > amountOfGuesses.length-1){
+            //avsluta spel
+            answContainer.classList.add('hide');
+            //stoppa knappen från att submitta fler gissningar.
+            // se från någon workshop nyligen. tror guess the 
+            // number nyaste versionen
+            console.log(`totalguesses of: ${totalGuesses} is reached`)
         
-        // gameOn = true;
-         // // Setting the first chosen image and starting game
-        setUpNewGuess();
-        // // hide startGameContainer and show studentImage + all game buttons
-        showAnswBtnsWhenStart(); 
-        // 
-        // gameOn = true;
-        // for(let totalGuesses = 0; totalGuesses < chosenStudents.length; totalGuesses++) { //for(let i = 0; i <= chosenStudents.length; i++){ //denna while vill jag ju loopa tills chosenStudents tar slut. ska det göras med en for-loop istället? forEach?
-            // forEach se ovan        
-                // // hide startGameContainer and show studentImage + all game buttons
-                // showAnswBtnsWhenStart();
-
-                answContainer.addEventListener('click', (e) => {
-
-                    if(totalGuesses > chosenStudents.length-1){
-
-                        // gameOn = false;
-                        //avsluta spel
-                        console.log(`totalguesses of: ${totalGuesses} is reached`)
-
-
-                    }  else if(e.target.innerHTML === chosenStudents[0].name) { //
-                        // det räcker inte med innerHTML om man vill undvika dubbletter
-                        // kan antingen ge gissad student guessedOn =true och 
-                        // filtrera ut resterande false, eller bara se till att inte dublettnamn
-                        // kommer(och därmed ändå inte kan klickas), vilket jag är tvungen att göra ändå.
-                        console.log("You clicked the right name")
-                        // chosenStudents.shift()
-                        rightGuesses ++;
-                        totalGuesses ++; //behöver ej egentligen räkna dessa utan bara ta 
-                                        //     chosenStudents.length för att veta hur många gissningar 
-                                        //     det blir, men vet ej hur jag ska få chosenStudents utanför scopet
-                        // skriv ut på något sätt att det är rätt svar:
-                        // kan kanske bara skriva i ett htmlEl under bilden 
-                        // så det inte blir bökigt
-                        setUpNewGuess();
-                        // // hide startGameContainer and show studentImage + all game buttons
-                        showAnswBtnsWhenStart();
-
-                    } else if(e.target.innerHTML !== chosenStudents[0].name){
-                        console.log("Clicked wrong name")
-                        // chosenStudents.shift()
-                        totalGuesses ++;
-                        // visa på ngt sätt att det var fel och skriv ut rätt svar 
-                        // rätt svar:
-                    
-                        setUpNewGuess();
-                        // hide startGameContainer and show studentImage + all game buttons
-                        showAnswBtnsWhenStart();
-
-                    } else if(e.target.innerHTML === 'Quit Game 😾'){
-                        console.log("Y U quit game?")                        
-                        rightGuesses = 0;
-                        totalGuesses = 0;
-                        // gameOn = false;
-                        // quitGame = true;
-                        clickToChooseAmountOfStudents();
-                    }
-                }); 
-            // });
-        // } 
-    // }
+        }  else if(e.target.innerHTML === chosenStudents[0].name) { //
+            // det räcker inte med innerHTML om man vill undvika dubbletter
+            // kan antingen ge gissad student guessedOn =true och 
+            // filtrera ut resterande false, eller bara se till att inte dublettnamn
+            // kommer(och därmed ändå inte kan klickas), vilket jag är tvungen att göra ändå.
+            console.log("You clicked the right name")
+            rightGuesses ++;
+            totalGuesses ++; //behöver ej egentligen räkna dessa utan bara ta 
+                            //     chosenStudents.length för att veta hur många gissningar 
+                            //     det blir, men vet ej hur jag ska få chosenStudents utanför scopet
+            // skriv ut på något sätt att det är rätt svar:
+            // kan kanske bara skriva i ett htmlEl under bilden 
+            // så det inte blir bökigt
+            chosenStudents.shift()
+            setUpNewGuess();
+            // // hide startGameContainer and show studentImage + all game buttons
+            showAnswBtnsWhenStart() 
+        } else if(e.target.innerHTML !== chosenStudents[0].name){
+            console.log("Clicked wrong name")
+            // chosenStudents.shift()
+            totalGuesses ++;
+            // visa på ngt sätt att det var fel och skriv ut rätt svar 
+            // rätt svar:
+            chosenStudents.shift();
+            setUpNewGuess();
+            // hide startGameContainer and show studentImage + all game buttons
+            showAnswBtnsWhenStart() 
+        } else if(e.target.innerHTML === 'Quit Game 😾'){
+            console.log("Y U quit game?")                        
+            rightGuesses = 0;
+            totalGuesses = 0;
+            // gameOn = false;
+            // quitGame = true;
+            clickToChooseAmountOfStudents();
+        }
+    });
 }
 
 
