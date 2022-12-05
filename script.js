@@ -131,11 +131,12 @@ const gameOnFunc = () => {
 
     answContainer.addEventListener('click', (e) => {
         if(e.target.tagName==="BUTTON" && e.target.innerHTML === chosenStudents[studentIndex].name) { //
+            disableAnswBtns(); 
             console.log("You clicked the right name")
             answBtnArray[0].innerHTML = `${chosenStudents[studentIndex].name}. <span class="right">Rätt svar!</span>`;
-            disableAnswBtns(); 
 
             setTimeout( () => {
+                disableAnswBtns(); 
                 rightGuesses ++;
                 totalGuesses ++; 
                 studentIndex++;
@@ -143,27 +144,30 @@ const gameOnFunc = () => {
                 ifGameFinished();
                 setUpNewGuess();
                 showAnswBtnsWhenStart();
-                }, 1500);
                 enableAnswBtns();
+                }, 1500);
           
         } else if(e.target.tagName==="BUTTON" && e.target.innerHTML !== chosenStudents[studentIndex].name){
+            disableAnswBtns();
             console.log("Clicked wrong name")
             e.target.innerHTML += ` <span class="wrong">Fel svar!</span>`;
-            disableAnswBtns();
+            
             
             setTimeout( () => {
+                disableAnswBtns(); 
                 answBtnArray[0].innerHTML = `${chosenStudents[studentIndex].name} <span class="right">är rätt svar!</span>`;
             }, 1500);
 
             setTimeout( () => {
+                disableAnswBtns(); 
                 totalGuesses ++;
                 studentIndex++;
                 ifGameFinished();
                 setUpNewGuess();
                 showAnswBtnsWhenStart();
                 
+                enableAnswBtns();
             }, 3800);
-            enableAnswBtns();
         } 
     });
 }
