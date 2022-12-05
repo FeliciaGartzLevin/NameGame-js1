@@ -177,11 +177,6 @@ const gameOnFunc = () => {
 const ifGameFinished = () => {
     if(totalGuesses >= amountOfGuesses){
         disableAnswBtns();
-        // the one line of code below has the purpose 
-        // of not giving an error message that "image can't 
-        // be read" hence all students been iterated through
-        // and beyond
-        studentIndex = amountOfGuesses-1;
         //quit game and show result
         studentImage.setAttribute('src', 'http://placekitten.com/300/300');
         answContainer.innerHTML = `
