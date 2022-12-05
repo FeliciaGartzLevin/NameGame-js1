@@ -18,13 +18,21 @@ const answContainer = document.querySelector('.answers-container');
 const gameEnded = document.querySelector('.gameEnded');
 
 const showAnswBtnsWhenStart = () => {
-    //gör en funktion här som jag kan kalla på för varje startklick (all, 10,20 val)
     startGameContainer.style = 'display: none';
     studentImage.style = 'display: block';
     answBtns.forEach( answBtn => {
        return answBtn.style = 'display: block';
     }); 
     quitBtn.style = 'display: flex';
+}
+
+const chooseAmountOfGuesses = () => {
+    startGameContainer.style = 'display: flex';
+    studentImage.style = 'display: none';
+    answBtns.forEach( answBtn => {
+       return answBtn.style = 'display: none';
+    }); 
+    quitBtn.style = 'display: none';
 }
 
 const shuffleArray = (array) => {
@@ -118,6 +126,9 @@ const gameOnFunc = () => {
             // skriv ut på något sätt att det är rätt svar:
             // kan kanske bara skriva i ett htmlEl under bilden 
             // så det inte blir bökigt
+            setTimeout( () => {
+                
+            }, 2000);
             studentIndex++;
             // showing result if game is finished
             ifGameFinished();
@@ -134,16 +145,7 @@ const gameOnFunc = () => {
             ifGameFinished();
             setUpNewGuess();
             showAnswBtnsWhenStart();
-        } else if(e.target.innerHTML.includes('Quit Game')){
-            // denna ingår inte i answContainer, 
-            // behöver göra ett nytt click-event för denna
-            console.log("Y U quit game?")                        
-            rightGuesses = 0;
-            totalGuesses = 0;
-            // gameOn = false;
-            // quitGame = true;
-            clickToChooseAmountOfStudents();
-        }
+        } 
     });
 }
 
@@ -167,9 +169,26 @@ const ifGameFinished = () => {
     }  
 }
 
+quitBtn.addEventListener('click', (e) => {
+    location.reload();
+
+/*     // nedan kod hjälper inte för att starta om spelet
+        console.log("Y U quit game?")                        
+        rightGuesses = 0;
+        totalGuesses = 0;
+        studentIndex = 0;
+        clickToChooseAmountOfStudents();
+        chooseAmountOfGuesses(); */
+});
+
 /* // Kända buggar (att meddela Johan):
 Spelet slutar inte att resgistrera klick på answContainer
-när spelet slutat
+när spelet slutat + får felmeddelande i consolen att 
+image inte kan läsas (eftersom den har itererat över hela 
+arrayen finns inga image kvar)
+
+Man kan klicka utanför knapparna och få fel svar. 
+Jag fick inte till det med dataset-, eller??? prova
  */
 
 

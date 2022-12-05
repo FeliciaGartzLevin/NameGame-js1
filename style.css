@@ -35,7 +35,7 @@ p{
     background-color: #055864;
     min-width: 360px;
     max-width: 80%;
-    height: 300px;
+    min-height: 300px;
     border-radius: 20px;
     display: flex;
     justify-content: center;
