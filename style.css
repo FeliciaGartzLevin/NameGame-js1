@@ -90,6 +90,11 @@ img{
         background: #B81365;
     }
 
+@media (hover: none) {
+    .start-game-btn{
+        background: #6A0136;
+    }
+
 @media screen and (max-width: 500px){
     .answers-container{
         display: flex;
