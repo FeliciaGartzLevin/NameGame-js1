@@ -70,6 +70,9 @@ p{
     font-weight: 600;
 }
 
+.start-game-btn:hover{
+    background: #B81365;
+}
 
 img{
     display: none;
@@ -83,18 +86,6 @@ img{
     justify-content: center;
     display: flex;
     flex-direction: column;
-}
-
-@media (hover: hover) {
-    .start-game-btn:hover{
-        background: #B81365;
-    }
-
-@media (hover: none) {
-    .start-game-btn{
-        background: #6A0136;
-    }
-    
 }
 
 @media screen and (max-width: 500px){
@@ -177,8 +168,6 @@ img{
     background: #B81365;
 }
 
-
-
 .answer-btns span.right{
     padding: 0.5rem;
     background: #05a017;
@@ -218,30 +207,9 @@ img{
     background: #8f801b;
 }
 
-@media (hover: hover) {
-  
-    .answer-btns:hover{
-        background: #B81365;
-    }
-
-    .answer-btns span.right{
-        padding: 0.5rem;
-        background: #05a017;
-    }
-
-    .answer-btns span.wrong{
-        padding: 0.5rem;
-        display: inline;
-        background: #9f0505;
-    }
-
-    .quit-btn:hover{
-        background: #8f801b;
-    }
-}
 
 @media (hover: none) {
-    .answer-btns{
+    .answer-btns:hover{
         background: #6A0136;
     }
     .answer-btns span.right{
@@ -255,7 +223,7 @@ img{
         background: #9f0505;
     }
 
-    .quit-btn{
+    .quit-btn:hover{
         display: none;
         background: #BFAB25;
     }
