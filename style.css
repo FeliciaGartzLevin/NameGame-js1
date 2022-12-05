@@ -88,22 +88,6 @@ img{
     flex-direction: column;
 }
 
-/* gör answContainer responsiv i 3 delar
-lägg en bakgrundsbild på bodyn with norepeat
-och opacitet
- grid-template-areas: 
-        "a"
-        "b"
-        "c"
-        "d"; 
-
- display: grid;
-        grid-template-areas: 
-        "a b"
-        "c d";
-*/
-
-
 @media screen and (max-width: 500px){
     .answers-container{
         display: flex;
