@@ -70,9 +70,6 @@ p{
     font-weight: 600;
 }
 
-.start-game-btn:hover{
-    background: #B81365;
-}
 
 img{
     display: none;
@@ -87,21 +84,6 @@ img{
     display: flex;
     flex-direction: column;
 }
-
-/* gör answContainer responsiv i 3 delar
-lägg en bakgrundsbild på bodyn with norepeat
-och opacitet
- grid-template-areas: 
-        "a"
-        "b"
-        "c"
-        "d"; 
-
- display: grid;
-        grid-template-areas: 
-        "a b"
-        "c d";
-*/
 
 
 @media screen and (max-width: 500px){
@@ -141,6 +123,10 @@ och opacitet
     }
     #answ4{
         grid-area: d;
+    }
+
+    .start-game-btn:hover{
+        background: #B81365;
     }
 }
 @media screen and (min-width: 1000px){
