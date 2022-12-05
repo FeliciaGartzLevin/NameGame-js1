@@ -85,6 +85,10 @@ img{
     flex-direction: column;
 }
 
+@media (hover: hover) {
+    .start-game-btn:hover{
+        background: #B81365;
+    }
 
 @media screen and (max-width: 500px){
     .answers-container{
@@ -125,9 +129,8 @@ img{
         grid-area: d;
     }
 
-    .start-game-btn:hover{
-        background: #B81365;
-    }
+}
+
 }
 @media screen and (min-width: 1000px){
     .answers-container{
