@@ -1,7 +1,4 @@
-/* todo: visa rätt svar någonstans
-kanske bara Rätt! eller Fel: detta är `${chosenStudents[studentIndex].name}`
-gör ett klick event för quit-knappen
- */
+
 // query the guess-buttons
 const guessAllBtn = document.querySelector('#btn-guess-all');
 const guessTenBtn = document.querySelector('#btn-guess-ten');
@@ -44,6 +41,19 @@ const shuffleArray = (array) => {
 	}
 }
 
+const disableAnswBtns = () => {
+    answBtns.forEach( answBtn => {
+        return answBtn.setAttribute('disabled', 'disabled');
+     }); 
+    answContainer.setAttribute('disabled', 'disabled');
+}
+
+const enableAnswBtns = () => {
+    answBtns.forEach( answBtn => {
+        return answBtn.removeAttribute('disabled');
+     }); 
+     answContainer.removeAttribute('disabled');
+}
 //cloning the students array into a new array
 // in order to keep the original array intact
 let allStudents = [...students];
@@ -121,30 +131,38 @@ const gameOnFunc = () => {
     answContainer.addEventListener('click', (e) => {
         if(e.target.innerHTML === chosenStudents[studentIndex].name) { //
             console.log("You clicked the right name")
-            rightGuesses ++;
-            totalGuesses ++; 
-            // skriv ut på något sätt att det är rätt svar:
-            // kan kanske bara skriva i ett htmlEl under bilden 
-            // så det inte blir bökigt
+            answBtnArray[0].innerHTML = `${chosenStudents[studentIndex].name}. <span>Rätt svar!</span>`;
+            disableAnswBtns(); 
+
             setTimeout( () => {
-                
-            }, 2000);
-            studentIndex++;
-            // showing result if game is finished
-            ifGameFinished();
-            
-            setUpNewGuess();
-            showAnswBtnsWhenStart();
+                rightGuesses ++;
+                totalGuesses ++; 
+                studentIndex++;
+                // showing result if game is finished
+                ifGameFinished();
+                setUpNewGuess();
+                showAnswBtnsWhenStart();
+                }, 1500);
+                enableAnswBtns();
+          
         } else if(e.target.innerHTML !== chosenStudents[studentIndex].name){
             console.log("Clicked wrong name")
-            // chosenStudents.shift()
-            totalGuesses ++;
-            // visa på ngt sätt att det var fel och skriv ut rätt svar 
-            // rätt svar:
-            studentIndex++;
-            ifGameFinished();
-            setUpNewGuess();
-            showAnswBtnsWhenStart();
+            e.target.innerHTML += `<p>Fel svar!</p>`;
+            disableAnswBtns();
+            
+            setTimeout( () => {
+                answBtnArray[0].innerHTML = `${chosenStudents[studentIndex].name} <span>är rätt svar!</span>`;
+            }, 1500);
+
+            setTimeout( () => {
+                totalGuesses ++;
+                studentIndex++;
+                ifGameFinished();
+                setUpNewGuess();
+                showAnswBtnsWhenStart();
+                
+            }, 3800);
+            enableAnswBtns();
         } 
     });
 }
@@ -189,7 +207,10 @@ arrayen finns inga image kvar)
 
 Man kan klicka utanför knapparna och få fel svar. 
 Jag fick inte till det med dataset-, eller??? prova
- */
+ 
+Om man klickar flera gånger under tiden en och samma bild visas blir det kaos
+med tanke på timeOuterna som jag har. Försökte 
+*/
 
 
 // EXTRAPILL vid rätt och fel svar, om jag hinner:
