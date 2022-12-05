@@ -183,12 +183,12 @@ och opacitet
     background: #B81365;
 }
 
-.answer-btns span{
+.answer-btns span.right{
     padding: 0.5rem;
     background: #05a017;
 }
 
-.answer-btns p{
+.answer-btns span.wrong{
     padding: 0.5rem;
     display: inline;
     background: #9f0505;

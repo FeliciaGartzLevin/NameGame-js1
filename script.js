@@ -6,6 +6,7 @@ const guessTwentyBtn = document.querySelector('#btn-guess-twenty');
 const startGameContainer = document.querySelector('#start-game-container');
 const studentImage = document.querySelector('#student-image');
 const answBtns = document.querySelectorAll('.answer-btns');
+const allAnswBtns = document.getElementsByClassName('answer-btns');
 const quitBtn = document.querySelector('#quit-btn');
 const answ1Btn = document.querySelector('#answ1');
 const answ2Btn = document.querySelector('#answ2');
@@ -129,9 +130,9 @@ const gameOnFunc = () => {
     showAnswBtnsWhenStart(); 
 
     answContainer.addEventListener('click', (e) => {
-        if(e.target.innerHTML === chosenStudents[studentIndex].name) { //
+        if(e.target.tagName==="BUTTON" && e.target.innerHTML === chosenStudents[studentIndex].name) { //
             console.log("You clicked the right name")
-            answBtnArray[0].innerHTML = `${chosenStudents[studentIndex].name}. <span>Rätt svar!</span>`;
+            answBtnArray[0].innerHTML = `${chosenStudents[studentIndex].name}. <span class="right">Rätt svar!</span>`;
             disableAnswBtns(); 
 
             setTimeout( () => {
@@ -145,13 +146,13 @@ const gameOnFunc = () => {
                 }, 1500);
                 enableAnswBtns();
           
-        } else if(e.target.innerHTML !== chosenStudents[studentIndex].name){
+        } else if(e.target.tagName==="BUTTON" && e.target.innerHTML !== chosenStudents[studentIndex].name){
             console.log("Clicked wrong name")
-            e.target.innerHTML += `<p>Fel svar!</p>`;
+            e.target.innerHTML += ` <span class="wrong">Fel svar!</span>`;
             disableAnswBtns();
             
             setTimeout( () => {
-                answBtnArray[0].innerHTML = `${chosenStudents[studentIndex].name} <span>är rätt svar!</span>`;
+                answBtnArray[0].innerHTML = `${chosenStudents[studentIndex].name} <span class="right">är rätt svar!</span>`;
             }, 1500);
 
             setTimeout( () => {
@@ -169,15 +170,9 @@ const gameOnFunc = () => {
 
 const ifGameFinished = () => {
     if(totalGuesses >= amountOfGuesses){
-        answBtns.forEach( answBtn => {
-            return answBtn.setAttribute('disabled', 'disabled');
-         }); 
-        answContainer.setAttribute('disabled', 'disabled');
+        disableAnswBtns();
         //avsluta spel och visa resultat
         studentImage.setAttribute('src', 'http://placekitten.com/300/300');
-        // answContainer.classList.add('hide');
-        // answBtns.classList.add('hide');
-        // gameEnded.classList.remove('hide');
         answContainer.innerHTML = `
         <p>You made <span>${rightGuesses}</span> right guesses out of <span>${totalGuesses}</span> total guesses</p>
         `; 
@@ -188,6 +183,7 @@ const ifGameFinished = () => {
 }
 
 quitBtn.addEventListener('click', (e) => {
+    // fusk men det funkar för att börja om i alla fall 😁
     location.reload();
 
 /*     // nedan kod hjälper inte för att starta om spelet
@@ -200,16 +196,15 @@ quitBtn.addEventListener('click', (e) => {
 });
 
 /* // Kända buggar (att meddela Johan):
-Spelet slutar inte att resgistrera klick på answContainer
+Spelet slutar inte att registrera klick på answContainer
 när spelet slutat + får felmeddelande i consolen att 
 image inte kan läsas (eftersom den har itererat över hela 
 arrayen finns inga image kvar)
-
-Man kan klicka utanför knapparna och få fel svar. 
-Jag fick inte till det med dataset-, eller??? prova
  
-Om man klickar flera gånger under tiden en och samma bild visas blir det kaos
-med tanke på timeOuterna som jag har. Försökte 
+Om man klickar flera gånger under tiden en och samma bild 
+visas blir det kaos och man kan hinner välja flera svar 
+med tanke på timeOuterna som jag har. 
+Försökte disable och enable element men utan framgång.
 */
 
 
