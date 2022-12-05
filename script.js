@@ -89,7 +89,7 @@ const setUpNewGuess = () => {
 const clickToChooseAmountOfStudents = () => {
 
     guessAllBtn.addEventListener('click', () => {
-        //välj ALLA studenter och starta spel
+        //choose All students and start game
         chosenStudents = allStudents.slice(0); 
         amountOfGuesses = chosenStudents.length;
 
@@ -98,7 +98,7 @@ const clickToChooseAmountOfStudents = () => {
         gameOnFunc();
     });
     guessTenBtn.addEventListener('click', () => { 
-        //välj 10 slumpade studenter och starta spel
+        //choose 10 students and start game
         chosenStudents = allStudents.slice(0,10); 
         amountOfGuesses = chosenStudents.length; 
 
@@ -108,8 +108,8 @@ const clickToChooseAmountOfStudents = () => {
             
     });
     guessTwentyBtn.addEventListener('click', () => {
-        //välj 20 slumpade studenter och starta spel
-        chosenStudents = allStudents.slice(0,20); //slumpa ut 10 stycken
+        //choose 20 students and start game
+        chosenStudents = allStudents.slice(0,20); 
         amountOfGuesses = chosenStudents.length;
         
         console.log('"20" is clicked');
@@ -122,7 +122,7 @@ clickToChooseAmountOfStudents();
 
 let totalGuesses = 0;
 let rightGuesses = 0;
-// en funktion för 1 spelomgång 
+// a function for 1 game
 const gameOnFunc = () => {
     // Setting img and randomizing answerbuttons    
     setUpNewGuess();
@@ -142,16 +142,17 @@ const gameOnFunc = () => {
                 studentIndex++;
                 // showing result if game is finished
                 ifGameFinished();
-                setUpNewGuess();
-                showAnswBtnsWhenStart();
-                enableAnswBtns();
+                if(totalGuesses < amountOfGuesses){
+                    setUpNewGuess();
+                    showAnswBtnsWhenStart();
+                    enableAnswBtns();
+                    }
                 }, 1500);
           
         } else if(e.target.tagName==="BUTTON" && e.target.innerHTML !== chosenStudents[studentIndex].name){
             disableAnswBtns();
             console.log("Clicked wrong name")
             e.target.innerHTML += ` <span class="wrong">Fel svar!</span>`;
-            
             
             setTimeout( () => {
                 disableAnswBtns(); 
@@ -163,11 +164,12 @@ const gameOnFunc = () => {
                 totalGuesses ++;
                 studentIndex++;
                 ifGameFinished();
-                setUpNewGuess();
-                showAnswBtnsWhenStart();
-                
-                enableAnswBtns();
-            }, 3800);
+                if(totalGuesses < amountOfGuesses){
+                    setUpNewGuess();
+                    showAnswBtnsWhenStart();
+                    enableAnswBtns();
+                    }
+            }, 3000);
         } 
     });
 }
@@ -175,62 +177,22 @@ const gameOnFunc = () => {
 const ifGameFinished = () => {
     if(totalGuesses >= amountOfGuesses){
         disableAnswBtns();
-        //avsluta spel och visa resultat
+        // the one line of code below has the purpose 
+        // of not giving an error message that "image can't 
+        // be read" hence all students been iterated through
+        // and beyond
+        studentIndex = amountOfGuesses-1;
+        //quit game and show result
         studentImage.setAttribute('src', 'http://placekitten.com/300/300');
         answContainer.innerHTML = `
         <p>You made <span>${rightGuesses}</span> right guesses out of <span>${totalGuesses}</span> total guesses</p>
         `; 
-    
         console.log(`totalguesses of: ${totalGuesses} is reached`);
         return;
     }  
 }
 
 quitBtn.addEventListener('click', (e) => {
-    // fusk men det funkar för att börja om i alla fall 😁
+    // cheat but it does it's job 😁
     location.reload();
-
-/*     // nedan kod hjälper inte för att starta om spelet
-        console.log("Y U quit game?")                        
-        rightGuesses = 0;
-        totalGuesses = 0;
-        studentIndex = 0;
-        clickToChooseAmountOfStudents();
-        chooseAmountOfGuesses(); */
 });
-
-/* // Kända buggar (att meddela Johan):
-Spelet slutar inte att registrera klick på answContainer
-när spelet slutat + får felmeddelande i consolen att 
-image inte kan läsas (eftersom den har itererat över hela 
-arrayen finns inga image kvar)
- 
-Om man klickar flera gånger under tiden en och samma bild 
-visas blir det kaos och man kan hinner välja flera svar 
-med tanke på timeOuterna som jag har. 
-Försökte disable och enable element men utan framgång.
-*/
-
-
-// EXTRAPILL vid rätt och fel svar, om jag hinner:
-
-    // // timer. fixa med denna när spelet funkar någolunda
-        // setTimeout(() => {
-    //     // gör knappen grön i 2 sek och ta bort de andra namnen
-    //          answBtn[rätt].classList.add(gör css-style grön färg);
-    //          answBtn[alla som är fel].style('display', 'hidden');
-    // }, 2000);
-    // // Setting the first chosen image and starting game
-
- // setTimeout(() => {
-    //     //visar valt svar som en röd knapp i 2 sek
-    //     answBtn[felVal].classList.add(gör en css-style med röd färg);               
-        //            // timer
-        //            setTimeout(() => {
-    //                 //visar rätt svar som en grön knapp i 4 sek samtidigt som de andra knapparna försvinner
-    //                 answBtn[rättVal].classList.add(css-style med grön färg);
-    //                 answBtn[felVal].style('display', 'hidden');
-    //                     answBtn[alla som är fel].style('display', 'block')
-    //            }, 2000);
-    // }, 2000);
-    // Setting the first chosen image and starting game
